@@ -1,0 +1,26 @@
+
+Data Access
+===========
+
+PV Atlas modeling results are made publicly available in the form
+of `GeoTIFF <https://en.wikipedia.org/wiki/GeoTIFF>`_ raster files
+hosted on Zenodo: LINK
+
+These files are georeferenced and can be imported into GIS
+and other geospatial analysis software.  Here is an example
+of importing a results file into a Python ``xarray`` dataset
+using the `rioxarray <https://corteva.github.io/rioxarray>`_ package:
+
+.. code-block:: python
+
+    import rioxarray
+    
+    filename = "test_full_resolution.tif"
+    rds = rioxarray.open_rasterio(filename)
+    rds = rds.sel(band=1)  # select first (only) layer of data
+    rds = rds.where(rds != rds.attrs['_FillValue'], np.nan)
+    
+    rds.plot()  # visualize the raster data
+
+    rds.sel(x=-80, y=40, method='nearest')  # extract the value for a location
+
