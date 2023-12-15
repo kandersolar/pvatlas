@@ -1,0 +1,154 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-sidebar-v2/css/leaflet-sidebar.css"/>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css"/>
+
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/chroma-js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+<script src="https://unpkg.com/geoblaze"></script>
+<script src="https://unpkg.com/leaflet-sidebar-v2"></script>
+<script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+<script>
+  L.Control.Layers.include({
+    getOverlays: function() {
+      var control = this;
+      var layers = [];
+
+      control._layers.forEach(function(obj) {
+        if (obj.overlay) {
+          layers.push({
+            "name": obj.name,
+            "visible": control._map.hasLayer(obj.layer),
+            "georasters": obj.layer.georasters,
+          });
+        }
+      });
+      return layers;
+    }
+  });
+
+  function rasterToLayer(georaster){
+    // console.log(chroma.brewer);
+    var scale = chroma.scale("Viridis");
+
+    const min = georaster.mins[0];
+    const max = georaster.maxs[0];
+    const range = georaster.ranges[0];
+
+    var layer = new GeoRasterLayer({
+      georaster: georaster,
+      opacity: 0.7,
+      pixelValuesToColorFn: function(pixelValues) {
+        var pixelValue = pixelValues[0]; // use value in first band
+        if (pixelValue === -9999) return null;
+        var scaledPixelValue = (pixelValue - min) / range;
+        var color = scale(scaledPixelValue).hex();
+        return color;
+      },
+      resolution: 512
+    });
+    return layer;
+  }
+
+  function addLayer(filename, layerControl, name){
+    fetch("./geotiffs/" + filename)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+          var layer = rasterToLayer(georaster);
+          layerControl.addOverlay(layer, name);
+      });
+    });
+  }
+
+  async function doArithmetic(operation, layer1, layer2){
+    // geoblaze can only do arithmetic between bands within a single raster
+    var merged = [layer1, layer2].reduce((result, georaster) => ({
+      ...georaster,
+      maxs: [...result.maxs, ...georaster.maxs],
+      mins: [...result.mins, ...georaster.mins],
+      ranges: [...result.ranges, georaster.ranges],
+      values: [...result.values, ...georaster.values],
+      numberOfRasters: result.values.length + georaster.values.length
+    }));
+    
+    var result = await geoblaze.bandArithmetic(merged, operation);
+    return result;
+  }
+
+  function init(id, geotiffs){
+    var map = L.map('map-' + id, {
+        fullscreenControl: {
+          pseudoFullscreen: true
+        }
+      }
+    ).setView([38, -97], 4);
+
+    var sidebar = L.control.sidebar({
+      container: 'sidebar-' + id,
+      position: 'left',
+    }).addTo(map);
+    
+    var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    })
+    osm.addTo(map);
+    var layerControl = L.control.layers({"OpenStreetMap": osm}, {}).addTo(map);
+
+    geotiffs.forEach(function(fn){
+      addLayer(fn, layerControl, fn);
+    });
+    var calculationLayer = null;  // populated based on user interaction
+
+    var selectOptions = [];
+    geotiffs.forEach(function(fn){
+      selectOptions.push("<option value='" + fn + "'>" + fn + "</option>");
+    });
+    document.getElementById("select-layer1-" + id).innerHTML = selectOptions.join();
+    document.getElementById("select-layer2-" + id).innerHTML = selectOptions.join();
+    
+    map.on('click', function(evt) {
+       var latlng = map.mouseEventToLatLng(evt.originalEvent);
+       var text = "<p></p><p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
+       
+       layerControl.getOverlays().forEach(function(layer){
+         //if(layer.visible){
+           var pixelValues = geoblaze.identify(layer.georasters[0], [latlng.lng, latlng.lat]);
+           text = text + "<p>" + layer.name + ": " + pixelValues[0] + "</p>";
+         //}
+       });
+       $("#selection-content-" + id).html(text);
+       sidebar.open("location-info-" + id);
+    });
+    
+    async function onSelectChange(){
+      
+      function getGeoraster(name){
+        var layers = layerControl.getOverlays();
+        for(var i = 0; i < layers.length; i++){
+          var layer = layers[i];
+          if(layer.name == name){
+            return layer.georasters[0];
+          }
+        }
+      }
+      var georaster1 = getGeoraster(document.getElementById("select-layer1-" + id).value);
+      var georaster2 = getGeoraster(document.getElementById("select-layer2-" + id).value);
+      var georasterDifference = await doArithmetic("a - b", georaster1, georaster2);
+
+      if(calculationLayer !== null){
+        layerControl.removeLayer(calculationLayer);
+        map.removeLayer(calculationLayer);
+      }
+      calculationLayer = rasterToLayer(georasterDifference);
+      calculationLayer.addTo(map);
+      layerControl.addOverlay(calculationLayer, "Calculated");
+    }
+    document.getElementById("select-layer1-" + id).onchange = onSelectChange; 
+    document.getElementById("select-layer2-" + id).onchange = onSelectChange; 
+  }
+</script>

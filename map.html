@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Interactive Map &#8212; PV Atlas</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Data Access" href="data.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PV Atlas</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   About PV Atlas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="methodology.html">
+   Methodology
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="publications.html">
+   Publications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data.html">
+   Data Access
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Interactive Map
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/map.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Interactive Map</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="interactive-map">
+<h1>Interactive Map<a class="headerlink" href="#interactive-map" title="Permalink to this headline">#</a></h1>
+<p>Click on the map to display information about the location.
+Different layers can be displayed using the selection widget
+in the upper right of the map.</p>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-sidebar-v2/css/leaflet-sidebar.css"/>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css"/>
+
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/chroma-js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+<script src="https://unpkg.com/geoblaze"></script>
+<script src="https://unpkg.com/leaflet-sidebar-v2"></script>
+<script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+<script>
+  L.Control.Layers.include({
+    getOverlays: function() {
+      var control = this;
+      var layers = [];
+
+      control._layers.forEach(function(obj) {
+        if (obj.overlay) {
+          layers.push({
+            "name": obj.name,
+            "visible": control._map.hasLayer(obj.layer),
+            "georasters": obj.layer.georasters,
+          });
+        }
+      });
+      return layers;
+    }
+  });
+
+  function rasterToLayer(georaster){
+    // console.log(chroma.brewer);
+    var scale = chroma.scale("Viridis");
+
+    const min = georaster.mins[0];
+    const max = georaster.maxs[0];
+    const range = georaster.ranges[0];
+
+    var layer = new GeoRasterLayer({
+      georaster: georaster,
+      opacity: 0.7,
+      pixelValuesToColorFn: function(pixelValues) {
+        var pixelValue = pixelValues[0]; // use value in first band
+        if (pixelValue === -9999) return null;
+        var scaledPixelValue = (pixelValue - min) / range;
+        var color = scale(scaledPixelValue).hex();
+        return color;
+      },
+      resolution: 512
+    });
+    return layer;
+  }
+
+  function addLayer(filename, layerControl, name){
+    fetch("./geotiffs/" + filename)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+          var layer = rasterToLayer(georaster);
+          layerControl.addOverlay(layer, name);
+      });
+    });
+  }
+
+  async function doArithmetic(operation, layer1, layer2){
+    // geoblaze can only do arithmetic between bands within a single raster
+    var merged = [layer1, layer2].reduce((result, georaster) => ({
+      ...georaster,
+      maxs: [...result.maxs, ...georaster.maxs],
+      mins: [...result.mins, ...georaster.mins],
+      ranges: [...result.ranges, georaster.ranges],
+      values: [...result.values, ...georaster.values],
+      numberOfRasters: result.values.length + georaster.values.length
+    }));
+    
+    var result = await geoblaze.bandArithmetic(merged, operation);
+    return result;
+  }
+
+  function init(id, geotiffs){
+    var map = L.map('map-' + id, {
+        fullscreenControl: {
+          pseudoFullscreen: true
+        }
+      }
+    ).setView([38, -97], 4);
+
+    var sidebar = L.control.sidebar({
+      container: 'sidebar-' + id,
+      position: 'left',
+    }).addTo(map);
+    
+    var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    })
+    osm.addTo(map);
+    var layerControl = L.control.layers({"OpenStreetMap": osm}, {}).addTo(map);
+
+    geotiffs.forEach(function(fn){
+      addLayer(fn, layerControl, fn);
+    });
+    var calculationLayer = null;  // populated based on user interaction
+
+    var selectOptions = [];
+    geotiffs.forEach(function(fn){
+      selectOptions.push("<option value='" + fn + "'>" + fn + "</option>");
+    });
+    document.getElementById("select-layer1-" + id).innerHTML = selectOptions.join();
+    document.getElementById("select-layer2-" + id).innerHTML = selectOptions.join();
+    
+    map.on('click', function(evt) {
+       var latlng = map.mouseEventToLatLng(evt.originalEvent);
+       var text = "<p></p><p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
+       
+       layerControl.getOverlays().forEach(function(layer){
+         //if(layer.visible){
+           var pixelValues = geoblaze.identify(layer.georasters[0], [latlng.lng, latlng.lat]);
+           text = text + "<p>" + layer.name + ": " + pixelValues[0] + "</p>";
+         //}
+       });
+       $("#selection-content-" + id).html(text);
+       sidebar.open("location-info-" + id);
+    });
+    
+    async function onSelectChange(){
+      
+      function getGeoraster(name){
+        var layers = layerControl.getOverlays();
+        for(var i = 0; i < layers.length; i++){
+          var layer = layers[i];
+          if(layer.name == name){
+            return layer.georasters[0];
+          }
+        }
+      }
+      var georaster1 = getGeoraster(document.getElementById("select-layer1-" + id).value);
+      var georaster2 = getGeoraster(document.getElementById("select-layer2-" + id).value);
+      var georasterDifference = await doArithmetic("a - b", georaster1, georaster2);
+
+      if(calculationLayer !== null){
+        layerControl.removeLayer(calculationLayer);
+        map.removeLayer(calculationLayer);
+      }
+      calculationLayer = rasterToLayer(georasterDifference);
+      calculationLayer.addTo(map);
+      layerControl.addOverlay(calculationLayer, "Calculated");
+    }
+    document.getElementById("select-layer1-" + id).onchange = onSelectChange; 
+    document.getElementById("select-layer2-" + id).onchange = onSelectChange; 
+  }
+</script><div id="sidebar-1" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#location-info-1" role="tab"><i class="fa-solid fa-location-dot"></i></a></li>
+            <li><a href="#calculations-1" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="location-info-1">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+                Selected location
+                <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            <div id="selection-content-1">
+            <p>Select a location on the map to display its information here.
+            </div>
+        </div>
+        
+        <div class="leaflet-sidebar-pane" id="calculations-1">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-1"></select></p>
+            <p>Layer 2: <select id="select-layer2-1"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-1" style="height: 400px; width: 100%"></div>
+
+<script>
+  $(window).on('load', function() {
+      init("1", ["ft-20_all-sky_0.00.tiff", "ft-20_all-sky_0.85.tiff", "ft-lat_all-sky_0.00.tiff"]);
+  });
+</script>
+<p>Here is a second map:</p>
+<div id="sidebar-2" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#location-info-2" role="tab"><i class="fa-solid fa-location-dot"></i></a></li>
+            <li><a href="#calculations-2" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="location-info-2">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+                Selected location
+                <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            <div id="selection-content-2">
+            <p>Select a location on the map to display its information here.
+            </div>
+        </div>
+        
+        <div class="leaflet-sidebar-pane" id="calculations-2">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-2"></select></p>
+            <p>Layer 2: <select id="select-layer2-2"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-2" style="height: 400px; width: 100%"></div>
+
+<script>
+  $(window).on('load', function() {
+      init("2", ["ft-20_all-sky_0.00.tiff", "sat_all-sky_0.00.tiff"]);
+  });
+</script>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="data.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Data Access</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By PVPMC<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
