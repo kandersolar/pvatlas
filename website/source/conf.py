@@ -40,6 +40,8 @@ html_theme_options = {
     "use_repository_button": False,
 }
 
+html_extra_path = ['../../data']
+
 # %%
 
 from docutils.parsers.rst import Directive, directives

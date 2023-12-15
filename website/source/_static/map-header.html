@@ -54,8 +54,8 @@
     return layer;
   }
 
-  function addLayer(url, layerControl, name){
-    fetch(url)
+  function addLayer(filename, layerControl, name){
+    fetch("./geotiffs/" + filename)
       .then(response => response.arrayBuffer())
       .then(arrayBuffer => {
         parseGeoraster(arrayBuffer).then(georaster => {
