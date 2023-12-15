@@ -15,10 +15,16 @@ high-resolution gridded weather and irradiance datasets.
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Contents
+   :caption: About
 
    self
-   map
    methodology
    publications
    data
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Chapters
+
+   map
