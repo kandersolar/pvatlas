@@ -1,0 +1,30 @@
+name: deploy
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: dependencies
+      run: |
+        pip install -r website/doc-requirements.txt
+        sudo apt-get install pandoc
+
+    - name: build
+      run: |
+        cd website && make html
+
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: website/build/html
