@@ -4,6 +4,7 @@
 
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 <script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/geotiff"></script>
 <script src="https://unpkg.com/chroma-js"></script>
 <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
 <script src="https://unpkg.com/geoblaze"></script>
@@ -31,13 +32,19 @@
     }
   });
 
-  function rasterToLayer(georaster){
+  function rasterToLayer(georaster, metadata){
     // console.log(chroma.brewer);
     var scale = chroma.scale("Viridis");
 
     const min = georaster.mins[0];
     const max = georaster.maxs[0];
     const range = georaster.ranges[0];
+
+    const description = (
+        "<br>" +
+        "File Date: " + metadata["CREATION_DATE"] + "<br>" +
+        "Description: " + metadata["DESCRIPTION"]
+    );
 
     var layer = new GeoRasterLayer({
       georaster: georaster,
@@ -49,7 +56,8 @@
         var color = scale(scaledPixelValue).hex();
         return color;
       },
-      resolution: 512
+      resolution: 512,
+      attribution: description  // TODO: put layer description somewhere nicer?
     });
     return layer;
   }
@@ -58,8 +66,21 @@
     fetch("./geotiffs/" + filename)
       .then(response => response.arrayBuffer())
       .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
-          var layer = rasterToLayer(georaster);
+        parseGeoraster(arrayBuffer).then(async georaster => {
+          
+          // TODO: see if there is some way to get the GDAL metadata without
+          // having to parse the entire Array Buffer.  Could also get rid of
+          // the geotiff.js import at the top of this file.
+          // https://github.com/GeoTIFF/georaster/issues/86
+          
+          var metadata = await GeoTIFF.fromArrayBuffer(georaster._data).then(geotiff => {
+              return geotiff.getImage().then(image => {
+                  return image.getGDALMetadata();
+              });
+          });
+          
+          console.log("metadata:", metadata);
+          var layer = rasterToLayer(georaster, metadata);
           layerControl.addOverlay(layer, name);
       });
     });
