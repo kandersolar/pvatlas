@@ -117,8 +117,6 @@ class GeotiffIndex(Directive):
         records = []
         for filename in filenames:
             rds = rioxarray.open_rasterio(os.path.join(DATA_DIR, filename))
-            print("DEBUG:", filename)
-            print(rds)
             records.append({
                 'description': rds.attrs.get('DESCRIPTION', '-'),
                 'date': rds.attrs.get('CREATION_DATE', '-'),
