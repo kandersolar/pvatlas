@@ -47,11 +47,17 @@ html_extra_path = ['../../data']
 from docutils.parsers.rst import Directive, directives
 from docutils import nodes
 
+import glob
+import os
+import rioxarray
+
+
 with open("_static/map-header.html", "r") as f:
     MAP_HTML_HEADER = f.read()
 
 with open("_static/map-widget-template.html", "r") as f:
     MAP_HTML_TEMPLATE = f.read()
+
 
 class MapHeader(Directive):
 
@@ -63,6 +69,7 @@ class MapHeader(Directive):
     def run(self):
         node = nodes.raw('', MAP_HTML_HEADER, format='html')
         return [node]
+
 
 class MapWidget(Directive):
 
@@ -84,6 +91,76 @@ class MapWidget(Directive):
         node = nodes.raw('', html, format='html')
         return [node]
 
+
+def _filesize_format(n_bytes):
+    n = n_bytes
+    for unit in ['B', 'KiB', 'MiB']:
+        if n < 1024:
+            return f"{n:0.01f} {unit}"
+        n /= 1024
+    return f"{n:0.01f} GiB"
+
+
+class GeotiffIndex(Directive):
+    required_arguments = 0
+    optional_arguments = 0
+    has_content = False
+    option_spec = {}
+
+    def run(self):
+        DATA_DIR = '../data'
+        filenames = glob.glob('**/*.tiff', root_dir=DATA_DIR, recursive=True)
+        
+        records = []
+        for filename in filenames:
+            rds = rioxarray.open_rasterio(os.path.join(DATA_DIR, filename))
+            records.append({
+                'description': rds.attrs.get('DESCRIPTION', '-'),
+                'date': rds.attrs.get('CREATION_DATE', '-'),
+                'displayname': os.path.split(filename)[-1],
+                'url': filename.replace('\\', '/'),
+                'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
+            })
+
+        
+        table = nodes.table(cols=3)
+        group = nodes.tgroup()
+        head = nodes.thead()
+        body = nodes.tbody()
+        
+        table += group
+        group += nodes.colspec(colwidth=4)
+        group += nodes.colspec(colwidth=2)
+        group += nodes.colspec(colwidth=3)
+        group += nodes.colspec(colwidth=8)
+        group += head
+        group += body
+        
+        row = nodes.row()
+        row += nodes.entry('', nodes.paragraph('', nodes.Text('GeoTIFF file')))
+        row += nodes.entry('', nodes.paragraph('', nodes.Text('File size')))
+        row += nodes.entry('', nodes.paragraph('', nodes.Text('Creation date')))
+        row += nodes.entry('', nodes.paragraph('', nodes.Text('Description')))
+        head += row
+        
+        for record in records:
+            row = nodes.row()            
+            
+            filenode = nodes.paragraph()
+            linknode = nodes.reference('', '', internal=False, refuri=record['url'])
+            linknode.append(nodes.Text(record['displayname']))
+            filenode += linknode
+            
+            row += nodes.entry('', filenode)
+            row += nodes.entry('', nodes.paragraph('', nodes.Text(record['filesize'])))
+            row += nodes.entry('', nodes.paragraph('', nodes.Text(record['date'])))
+            row += nodes.entry('', nodes.paragraph('', nodes.Text(record['description'])))
+            body += row
+
+        return [table]
+
+
 def setup(app):
     app.add_directive('map-widget', MapWidget)
     app.add_directive('map-header', MapHeader)
+    app.add_directive('geotiff-index', GeotiffIndex)

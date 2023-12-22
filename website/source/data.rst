@@ -3,8 +3,8 @@ Data Access
 ===========
 
 PV Atlas modeling results are made publicly available in the form
-of `GeoTIFF <https://en.wikipedia.org/wiki/GeoTIFF>`_ raster files
-hosted on Zenodo: LINK
+of `GeoTIFF <https://en.wikipedia.org/wiki/GeoTIFF>`_ raster files.
+A complete list of files and their descriptions is found below.
 
 These files are georeferenced and can be imported into GIS
 and other geospatial analysis software.  Here is an example
@@ -26,4 +26,9 @@ using the `rioxarray <https://corteva.github.io/rioxarray>`_ package:
     rds.plot()  # visualize the raster data
     
     rds.sel(x=-80, y=40, method='nearest')  # extract the value for a location
+
+
+Here is a complete list of PV Atlas GeoTIFF files:
+
+.. geotiff-index::
 
