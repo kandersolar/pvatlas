@@ -4,6 +4,7 @@
 
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 <script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/geotiff"></script>
 <script src="https://unpkg.com/chroma-js"></script>
 <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
 <script src="https://unpkg.com/geoblaze"></script>
@@ -19,7 +20,7 @@
       var layers = [];
 
       control._layers.forEach(function(obj) {
-        if (obj.overlay) {
+        if (!obj.overlay) {  // technically they are base layers, not overlays
           layers.push({
             "name": obj.name,
             "visible": control._map.hasLayer(obj.layer),
@@ -31,13 +32,22 @@
     }
   });
 
-  function rasterToLayer(georaster){
+  function rasterToLayer(georaster, metadata){
     // console.log(chroma.brewer);
     var scale = chroma.scale("Viridis");
 
     const min = georaster.mins[0];
     const max = georaster.maxs[0];
     const range = georaster.ranges[0];
+
+    var description = null;
+    if(metadata !== null){
+        description = (
+            "<br>" +
+            "File Date: " + metadata["CREATION_DATE"] + "<br>" +
+            "Description: " + metadata["DESCRIPTION"]
+        );
+    }
 
     var layer = new GeoRasterLayer({
       georaster: georaster,
@@ -49,7 +59,8 @@
         var color = scale(scaledPixelValue).hex();
         return color;
       },
-      resolution: 512
+      resolution: 512,
+      attribution: description  // TODO: put layer description somewhere nicer?
     });
     return layer;
   }
@@ -58,9 +69,22 @@
     fetch("./geotiffs/" + filename)
       .then(response => response.arrayBuffer())
       .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
-          var layer = rasterToLayer(georaster);
-          layerControl.addOverlay(layer, name);
+        parseGeoraster(arrayBuffer).then(async georaster => {
+
+          // TODO: see if there is some way to get the GDAL metadata without
+          // having to parse the entire Array Buffer.  Could also get rid of
+          // the geotiff.js import at the top of this file.
+          // https://github.com/GeoTIFF/georaster/issues/86
+
+          var metadata = await GeoTIFF.fromArrayBuffer(georaster._data).then(geotiff => {
+              return geotiff.getImage().then(image => {
+                  return image.getGDALMetadata();
+              });
+          });
+
+          console.log("metadata:", metadata);
+          var layer = rasterToLayer(georaster, metadata);
+          layerControl.addBaseLayer(layer, name);
       });
     });
   }
@@ -75,7 +99,7 @@
       values: [...result.values, ...georaster.values],
       numberOfRasters: result.values.length + georaster.values.length
     }));
-    
+
     var result = await geoblaze.bandArithmetic(merged, operation);
     return result;
   }
@@ -92,41 +116,33 @@
       container: 'sidebar-' + id,
       position: 'left',
     }).addTo(map);
-    
+
     var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     })
     osm.addTo(map);
-    var layerControl = L.control.layers({"OpenStreetMap": osm}, {}).addTo(map);
 
-    geotiffs.forEach(function(fn){
-      addLayer(fn, layerControl, fn);
-    });
-    var calculationLayer = null;  // populated based on user interaction
+    // note: we are using "base layers" for the data layers so that only
+    // one data layer is selectable at a time (base layers use radio buttons,
+    // overlays use checkboxes).  We always want the OSM layer active, so
+    // just add it to the map, not the layer control.
+
+    var layerControl = L.control.layers({}).addTo(map);
 
     var selectOptions = [];
     geotiffs.forEach(function(fn){
-      selectOptions.push("<option value='" + fn + "'>" + fn + "</option>");
+      var name = fn.split("/").pop();  // only show the filename, not the full path
+      addLayer(fn, layerControl, name);
+      selectOptions.push("<option value='" + name + "'>" + name + "</option>");
     });
+
     document.getElementById("select-layer1-" + id).innerHTML = selectOptions.join();
     document.getElementById("select-layer2-" + id).innerHTML = selectOptions.join();
-    
-    map.on('click', function(evt) {
-       var latlng = map.mouseEventToLatLng(evt.originalEvent);
-       var text = "<p></p><p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
-       
-       layerControl.getOverlays().forEach(function(layer){
-         //if(layer.visible){
-           var pixelValues = geoblaze.identify(layer.georasters[0], [latlng.lng, latlng.lat]);
-           text = text + "<p>" + layer.name + ": " + pixelValues[0] + "</p>";
-         //}
-       });
-       $("#selection-content-" + id).html(text);
-       sidebar.open("location-info-" + id);
-    });
-    
+
+    var calculationLayer = null;  // populated based on user interaction
+
     async function onSelectChange(){
-      
+
       function getGeoraster(name){
         var layers = layerControl.getOverlays();
         for(var i = 0; i < layers.length; i++){
@@ -144,11 +160,54 @@
         layerControl.removeLayer(calculationLayer);
         map.removeLayer(calculationLayer);
       }
-      calculationLayer = rasterToLayer(georasterDifference);
+      // TODO: metadata for calculated layer?
+      calculationLayer = rasterToLayer(georasterDifference, {});
       calculationLayer.addTo(map);
-      layerControl.addOverlay(calculationLayer, "Calculated");
+      layerControl.addBaseLayer(calculationLayer, "Calculated");
     }
-    document.getElementById("select-layer1-" + id).onchange = onSelectChange; 
-    document.getElementById("select-layer2-" + id).onchange = onSelectChange; 
+    document.getElementById("select-layer1-" + id).onchange = onSelectChange;
+    document.getElementById("select-layer2-" + id).onchange = onSelectChange;
+
+
+    map.on('mousemove', function(evt) {
+      var latlng = map.mouseEventToLatLng(evt.originalEvent);
+      var text = "<p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
+
+      text += "<table style='border-spacing: 5px;'><tr><th>Layer</th><th>Pixel value</th></tr>";
+      layerControl.getOverlays().forEach(function(layer){
+        var prefix = "";
+        var suffix = "";
+        if(layer.visible){
+          prefix = "<strong>";
+          suffix = "</strong>";
+        }
+        var pixelValues = geoblaze.identify(layer.georasters[0], [latlng.lng, latlng.lat]);
+        var value = "-";
+        if(pixelValues !== null && pixelValues[0] != -9999){
+          value = pixelValues[0];
+        }
+        text = text + (
+           "<tr>" + "<td>" + prefix + layer.name + suffix + "</td>" +
+           "<td>" + value + "</td>" + "</tr>"
+        );
+      });
+      text = text + "</table>";
+      $("#selection-content-" + id)[0].innerHTML = text;
+    });
+
+    L.Control.textbox = L.Control.extend({
+       onAdd: function(map) {
+         var text = L.DomUtil.create('div');
+         text.id = "selection-content-" + id;
+         text.innerHTML = "text here";
+         text.style = 'background-color: #fff; border: 1px solid black;';
+         return text;
+      },
+      onRemove: function(map) {
+        // Nothing to do here
+      }
+    });
+    L.control.textbox = function(opts) { return new L.Control.textbox(opts);}
+    L.control.textbox({ position: 'bottomright' }).addTo(map);
   }
 </script>
