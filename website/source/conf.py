@@ -117,11 +117,12 @@ class GeotiffIndex(Directive):
         records = []
         for filename in filenames:
             rds = rioxarray.open_rasterio(os.path.join(DATA_DIR, filename))
+            print("DEBUG:", rds.attrs)
             records.append({
                 'description': rds.attrs.get('DESCRIPTION', '-'),
                 'date': rds.attrs.get('CREATION_DATE', '-'),
                 'displayname': os.path.split(filename)[-1],
-                'url': filename.replace('\\', '/'),
+                'url': filename.replace('\\', '/'),  # location within the data directory
                 'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
             })
         print("pv atlas: parsed GeoTIFF metadata:")
