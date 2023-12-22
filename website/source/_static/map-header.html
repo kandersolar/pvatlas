@@ -32,6 +32,7 @@
     }
   });
 
+
   function rasterToLayer(georaster, metadata){
     // console.log(chroma.brewer);
     var scale = chroma.scale("Viridis");
@@ -65,6 +66,7 @@
     return layer;
   }
 
+
   function addLayer(filename, layerControl, name){
     fetch("./geotiffs/" + filename)
       .then(response => response.arrayBuffer())
@@ -89,6 +91,7 @@
     });
   }
 
+
   async function doArithmetic(operation, layer1, layer2){
     // geoblaze can only do arithmetic between bands within a single raster
     var merged = [layer1, layer2].reduce((result, georaster) => ({
@@ -103,6 +106,7 @@
     var result = await geoblaze.bandArithmetic(merged, operation);
     return result;
   }
+
 
   function init(id, geotiffs){
     var map = L.map('map-' + id, {
@@ -136,6 +140,8 @@
       selectOptions.push("<option value='" + name + "'>" + name + "</option>");
     });
 
+
+    // layer difference calculation
     document.getElementById("select-layer1-" + id).innerHTML = selectOptions.join();
     document.getElementById("select-layer2-" + id).innerHTML = selectOptions.join();
 
@@ -169,6 +175,7 @@
     document.getElementById("select-layer2-" + id).onchange = onSelectChange;
 
 
+    // mousemove / hover interaction
     map.on('mousemove', function(evt) {
       var latlng = map.mouseEventToLatLng(evt.originalEvent);
       var text = "<p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
