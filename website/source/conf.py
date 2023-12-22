@@ -50,6 +50,7 @@ from docutils import nodes
 import glob
 import os
 import rioxarray
+import pandas as pd
 
 
 with open("_static/map-header.html", "r") as f:
@@ -108,8 +109,10 @@ class GeotiffIndex(Directive):
     option_spec = {}
 
     def run(self):
-        DATA_DIR = '../data'
+        DATA_DIR = os.path.abspath('../data')
+        print(f"pv atlas: looking for GeoTIFF files in {DATA_DIR}")
         filenames = glob.glob('**/*.tiff', root_dir=DATA_DIR, recursive=True)
+        print(f"pv atlas: found {len(filenames)} GeoTIFF files")
         
         records = []
         for filename in filenames:
@@ -121,7 +124,8 @@ class GeotiffIndex(Directive):
                 'url': filename.replace('\\', '/'),
                 'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
             })
-
+        print("pv atlas: parsed GeoTIFF metadata:")
+        print(pd.DataFrame(records))
         
         table = nodes.table(cols=3)
         group = nodes.tgroup()
