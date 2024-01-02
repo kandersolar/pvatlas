@@ -110,7 +110,7 @@ class GeotiffIndex(Directive):
     required_arguments = 0
     optional_arguments = 0
     has_content = False
-    option_spec = {}
+    option_spec = {'pattern': directives.unchanged}
 
     def run(self):
         env = self.state.document.settings.env
@@ -120,8 +120,9 @@ class GeotiffIndex(Directive):
         os.makedirs(images_directory, exist_ok=True)
         
         DATA_DIR = os.path.abspath('../data')
-        print(f"pv atlas: looking for GeoTIFF files in {DATA_DIR}")
-        filenames = glob.glob('**/*.tiff', root_dir=DATA_DIR, recursive=True)
+        pattern = self.options.get('pattern', None) or '**/*.tiff'
+        print(f"pv atlas: looking for GeoTIFF files in {DATA_DIR} using pattern: {pattern}")
+        filenames = glob.glob(pattern, root_dir=DATA_DIR, recursive=True)
         print(f"pv atlas: found {len(filenames)} GeoTIFF files")
         
         records = []

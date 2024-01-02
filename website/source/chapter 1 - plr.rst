@@ -25,3 +25,5 @@ Here is a second map:
     synthetic-plr/fslr_0.1_50.tiff
     synthetic-plr/fslr_0.15_50.tiff
     synthetic-plr/fslr_0.2_50.tiff
+.. geotiff-index::
+    :pattern: geotiffs/synthetic-plr/*.tiff
