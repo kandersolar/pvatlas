@@ -20,13 +20,16 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
-nbsphinx_execute = 'never'
-nbsphinx_requirejs_path = ''  # disable requirejs; already loaded by theme
-
 # https://sphinxcontrib-bibtex.readthedocs.io/en/latest/usage.html#configuration
 bibtex_default_style = 'plain'
 bibtex_reference_style = 'label'
 bibtex_bibfiles = ['references.bib']
+
+bibtex_cite_id = "cite-{bibliography_count}-{key}"
+bibtex_footcite_id = "footcite-{key}"
+bibtex_bibliography_id = "bibliography-{bibliography_count}"
+bibtex_footbibliography_id = "footbibliography-{footbibliography_count}"
+
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

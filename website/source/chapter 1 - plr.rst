@@ -15,6 +15,17 @@ in the upper right of the map.
     synthetic-plr/can275_0.1_50.tiff
 
 
+References
+----------
+
+.. bibliography::
+   :list: enumerated
+
+   Theristis2023srrl
+   
+
+Data files
+----------
 
 .. geotiff-index::
     :pattern: geotiffs/synthetic-plr/*.tiff

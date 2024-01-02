@@ -47,6 +47,7 @@ References
 ----------
 
 .. bibliography::
+   :list: enumerated
 
    Sengupta2018
    Holmgren2018
