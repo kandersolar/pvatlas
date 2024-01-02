@@ -97,9 +97,11 @@ def _filesize_format(n_bytes):
     n = n_bytes
     for unit in ['B', 'KiB', 'MiB']:
         if n < 1024:
-            return f"{n:0.01f} {unit}"
+            break
         n /= 1024
-    return f"{n:0.01f} GiB"
+    else:
+        unit = 'GiB'
+    return f"{n:0.01f} {unit}"
 
 
 class GeotiffIndex(Directive):
