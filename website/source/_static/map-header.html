@@ -192,6 +192,7 @@
         var value = "-";
         if(pixelValues !== null && pixelValues[0] != -9999){
           value = pixelValues[0];
+          value = value.toFixed(3);
         }
         text = text + (
            "<tr>" + "<td>" + prefix + layer.name + suffix + "</td>" +
@@ -204,10 +205,9 @@
 
     L.Control.textbox = L.Control.extend({
        onAdd: function(map) {
-         var text = L.DomUtil.create('div');
+         var text = L.DomUtil.create('div', 'leaflet-control-layers leaflet-control');
          text.id = "selection-content-" + id;
          text.innerHTML = "text here";
-         text.style = 'background-color: #fff; border: 1px solid black;';
          return text;
       },
       onRemove: function(map) {
