@@ -51,6 +51,8 @@ import glob
 import os
 import rioxarray
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 with open("_static/map-header.html", "r") as f:
@@ -111,6 +113,12 @@ class GeotiffIndex(Directive):
     option_spec = {}
 
     def run(self):
+        env = self.state.document.settings.env
+    
+        images_directory = os.path.normpath("./source/_static/thumbnails")
+        print(f"pv atlas: creating thumbnail directory ({images_directory})")
+        os.makedirs(images_directory, exist_ok=True)
+        
         DATA_DIR = os.path.abspath('../data')
         print(f"pv atlas: looking for GeoTIFF files in {DATA_DIR}")
         filenames = glob.glob('**/*.tiff', root_dir=DATA_DIR, recursive=True)
@@ -118,14 +126,34 @@ class GeotiffIndex(Directive):
         
         records = []
         for filename in filenames:
+            print(f"pv atlas: processing {filename}")
             rds = rioxarray.open_rasterio(os.path.join(DATA_DIR, filename))
+            rds = rds.sel(band=1)  # select first (only) layer of data
+            rds = rds.where(rds != rds.attrs['_FillValue'], np.nan)
+
+            image_filepath = os.path.join(images_directory, filename.replace('.tiff', '.png'))
+            env.images.add_file('', image_filepath)
+
+            if not os.path.exists(image_filepath):
+                os.makedirs(os.path.dirname(image_filepath), exist_ok=True)
+
+                rds.plot(add_colorbar=False, size=3, aspect=1.5)
+                plt.axis('off')
+                plt.title(None)
+                plt.savefig(image_filepath, bbox_inches='tight', dpi=100)
+                plt.close('all')
+                print(f"pv atlas: saved thumbnail to {image_filepath}")
+
             records.append({
                 'description': rds.attrs.get('DESCRIPTION', '-'),
                 'date': rds.attrs.get('CREATION_DATE', '-'),
                 'displayname': os.path.split(filename)[-1],
                 'url': filename.replace('\\', '/'),  # location within the data directory
                 'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
+                'thumbnail': image_filepath.replace("source\\", ""),
             })
+
+            
         print("pv atlas: parsed GeoTIFF metadata:")
         print(pd.DataFrame(records))
         
@@ -135,8 +163,6 @@ class GeotiffIndex(Directive):
         body = nodes.tbody()
         
         table += group
-        group += nodes.colspec(colwidth=4)
-        group += nodes.colspec(colwidth=2)
         group += nodes.colspec(colwidth=3)
         group += nodes.colspec(colwidth=8)
         group += head
@@ -144,23 +170,26 @@ class GeotiffIndex(Directive):
         
         row = nodes.row()
         row += nodes.entry('', nodes.paragraph('', nodes.Text('GeoTIFF file')))
-        row += nodes.entry('', nodes.paragraph('', nodes.Text('File size')))
-        row += nodes.entry('', nodes.paragraph('', nodes.Text('Creation date')))
         row += nodes.entry('', nodes.paragraph('', nodes.Text('Description')))
         head += row
         
         for record in records:
             row = nodes.row()            
             
-            filenode = nodes.paragraph()
+            thumbnailnode = nodes.paragraph()
             linknode = nodes.reference('', '', internal=False, refuri=record['url'])
-            linknode.append(nodes.Text(record['displayname']))
-            filenode += linknode
+            linknode.append(nodes.image("", uri=record['thumbnail'], alt=record['thumbnail']))
+            thumbnailnode += linknode
             
-            row += nodes.entry('', filenode)
-            row += nodes.entry('', nodes.paragraph('', nodes.Text(record['filesize'])))
-            row += nodes.entry('', nodes.paragraph('', nodes.Text(record['date'])))
-            row += nodes.entry('', nodes.paragraph('', nodes.Text(record['description'])))
+            row += nodes.entry('', thumbnailnode)
+            
+            description = nodes.paragraph('', nodes.Text("Description: " + record['description']))
+            fileinfo = nodes.paragraph('', nodes.Text("Download: "))
+            linknode = nodes.reference('', '', internal=False, refuri=record['url'])
+            linknode.append(nodes.Text(record['displayname'] + " - [" + record['filesize'] + "]"))
+            fileinfo += linknode
+            description.append(fileinfo)
+            row += nodes.entry('', description)
             body += row
 
         return [table]
