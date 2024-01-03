@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Climatic effect on PLR uncertainty &#8212; PV Atlas</title>
+    <title>Climatic influence on PLR uncertainty &#8212; PV Atlas</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -33,7 +33,7 @@
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Interactive Map" href="map.html" />
+    <link rel="prev" title="Example Page" href="map.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,12 +115,12 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="map.html">
-   Interactive Map
+   Example Page
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Climatic effect on PLR uncertainty
+   Climatic influence on PLR uncertainty
   </a>
  </li>
 </ul>
@@ -233,23 +233,100 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scenario-1-c-si">
+   Scenario 1: c-Si
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scenario-2-cdte">
+   Scenario 2: CdTe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-files">
+   Data files
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Climatic effect on PLR uncertainty</h1>
+                <h1>Climatic influence on PLR uncertainty</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scenario-1-c-si">
+   Scenario 1: c-Si
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scenario-2-cdte">
+   Scenario 2: CdTe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-files">
+   Data files
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -257,12 +334,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="climatic-effect-on-plr-uncertainty">
-<h1>Climatic effect on PLR uncertainty<a class="headerlink" href="#climatic-effect-on-plr-uncertainty" title="Permalink to this headline">#</a></h1>
-<p>Click on the map to display information about the location.
-Different layers can be displayed using the selection widget
-in the upper right of the map.</p>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-sidebar-v2/css/leaflet-sidebar.css"/>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css"/>
 
@@ -277,204 +349,35 @@ in the upper right of the map.</p>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
-<script>
-  L.Control.Layers.include({
-    getOverlays: function() {
-      var control = this;
-      var layers = [];
+<script src="/_static/map-widget.js"></script>
 
-      control._layers.forEach(function(obj) {
-        if (!obj.overlay) {  // technically they are base layers, not overlays
-          layers.push({
-            "name": obj.name,
-            "visible": control._map.hasLayer(obj.layer),
-            "georasters": obj.layer.georasters,
-          });
-        }
-      });
-      return layers;
-    }
-  });
-
-  function rasterToLayer(georaster, metadata){
-    // console.log(chroma.brewer);
-    var scale = chroma.scale("Viridis");
-
-    const min = georaster.mins[0];
-    const max = georaster.maxs[0];
-    const range = georaster.ranges[0];
-
-    var description = null;
-    if(metadata !== null){
-        description = (
-            "<br>" +
-            "File Date: " + metadata["CREATION_DATE"] + "<br>" +
-            "Description: " + metadata["DESCRIPTION"]
-        );
-    }
-
-    var layer = new GeoRasterLayer({
-      georaster: georaster,
-      opacity: 0.7,
-      pixelValuesToColorFn: function(pixelValues) {
-        var pixelValue = pixelValues[0]; // use value in first band
-        if (pixelValue === -9999) return null;
-        var scaledPixelValue = (pixelValue - min) / range;
-        var color = scale(scaledPixelValue).hex();
-        return color;
-      },
-      resolution: 512,
-      attribution: description  // TODO: put layer description somewhere nicer?
-    });
-    return layer;
-  }
-
-  function addLayer(filename, layerControl, name){
-    fetch("./geotiffs/" + filename)
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(async georaster => {
-
-          // TODO: see if there is some way to get the GDAL metadata without
-          // having to parse the entire Array Buffer.  Could also get rid of
-          // the geotiff.js import at the top of this file.
-          // https://github.com/GeoTIFF/georaster/issues/86
-
-          var metadata = await GeoTIFF.fromArrayBuffer(georaster._data).then(geotiff => {
-              return geotiff.getImage().then(image => {
-                  return image.getGDALMetadata();
-              });
-          });
-
-          console.log("metadata:", metadata);
-          var layer = rasterToLayer(georaster, metadata);
-          layerControl.addBaseLayer(layer, name);
-      });
-    });
-  }
-
-  async function doArithmetic(operation, layer1, layer2){
-    // geoblaze can only do arithmetic between bands within a single raster
-    var merged = [layer1, layer2].reduce((result, georaster) => ({
-      ...georaster,
-      maxs: [...result.maxs, ...georaster.maxs],
-      mins: [...result.mins, ...georaster.mins],
-      ranges: [...result.ranges, georaster.ranges],
-      values: [...result.values, ...georaster.values],
-      numberOfRasters: result.values.length + georaster.values.length
-    }));
-
-    var result = await geoblaze.bandArithmetic(merged, operation);
-    return result;
-  }
-
-  function init(id, geotiffs){
-    var map = L.map('map-' + id, {
-        fullscreenControl: {
-          pseudoFullscreen: true
-        }
-      }
-    ).setView([38, -97], 4);
-
-    var sidebar = L.control.sidebar({
-      container: 'sidebar-' + id,
-      position: 'left',
-    }).addTo(map);
-
-    var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    })
-    osm.addTo(map);
-
-    // note: we are using "base layers" for the data layers so that only
-    // one data layer is selectable at a time (base layers use radio buttons,
-    // overlays use checkboxes).  We always want the OSM layer active, so
-    // just add it to the map, not the layer control.
-
-    var layerControl = L.control.layers({}).addTo(map);
-
-    var selectOptions = [];
-    geotiffs.forEach(function(fn){
-      var name = fn.split("/").pop();  // only show the filename, not the full path
-      addLayer(fn, layerControl, name);
-      selectOptions.push("<option value='" + name + "'>" + name + "</option>");
-    });
-
-    document.getElementById("select-layer1-" + id).innerHTML = selectOptions.join();
-    document.getElementById("select-layer2-" + id).innerHTML = selectOptions.join();
-
-    var calculationLayer = null;  // populated based on user interaction
-
-    async function onSelectChange(){
-
-      function getGeoraster(name){
-        var layers = layerControl.getOverlays();
-        for(var i = 0; i < layers.length; i++){
-          var layer = layers[i];
-          if(layer.name == name){
-            return layer.georasters[0];
-          }
-        }
-      }
-      var georaster1 = getGeoraster(document.getElementById("select-layer1-" + id).value);
-      var georaster2 = getGeoraster(document.getElementById("select-layer2-" + id).value);
-      var georasterDifference = await doArithmetic("a - b", georaster1, georaster2);
-
-      if(calculationLayer !== null){
-        layerControl.removeLayer(calculationLayer);
-        map.removeLayer(calculationLayer);
-      }
-      // TODO: metadata for calculated layer?
-      calculationLayer = rasterToLayer(georasterDifference, {});
-      calculationLayer.addTo(map);
-      layerControl.addBaseLayer(calculationLayer, "Calculated");
-    }
-    document.getElementById("select-layer1-" + id).onchange = onSelectChange;
-    document.getElementById("select-layer2-" + id).onchange = onSelectChange;
-
-
-    map.on('mousemove', function(evt) {
-      var latlng = map.mouseEventToLatLng(evt.originalEvent);
-      var text = "<p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
-
-      text += "<table style='border-spacing: 5px;'><tr><th>Layer</th><th>Pixel value</th></tr>";
-      layerControl.getOverlays().forEach(function(layer){
-        var prefix = "";
-        var suffix = "";
-        if(layer.visible){
-          prefix = "<strong>";
-          suffix = "</strong>";
-        }
-        var pixelValues = geoblaze.identify(layer.georasters[0], [latlng.lng, latlng.lat]);
-        var value = "-";
-        if(pixelValues !== null && pixelValues[0] != -9999){
-          value = pixelValues[0];
-        }
-        text = text + (
-           "<tr>" + "<td>" + prefix + layer.name + suffix + "</td>" +
-           "<td>" + value + "</td>" + "</tr>"
-        );
-      });
-      text = text + "</table>";
-      $("#selection-content-" + id)[0].innerHTML = text;
-    });
-
-    L.Control.textbox = L.Control.extend({
-       onAdd: function(map) {
-         var text = L.DomUtil.create('div');
-         text.id = "selection-content-" + id;
-         text.innerHTML = "text here";
-         text.style = 'background-color: #fff; border: 1px solid black;';
-         return text;
-      },
-      onRemove: function(map) {
-        // Nothing to do here
-      }
-    });
-    L.control.textbox = function(opts) { return new L.Control.textbox(opts);}
-    L.control.textbox({ position: 'bottomright' }).addTo(map);
-  }
-</script><div id="sidebar-1" class="leaflet-sidebar collapsed">
+<section id="climatic-influence-on-plr-uncertainty">
+<h1>Climatic influence on PLR uncertainty<a class="headerlink" href="#climatic-influence-on-plr-uncertainty" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>PV systems experience gradual performance reduction over their lifetime due to component
+aging and other effects.  Many technology- and climate-specific mechanisms
+contribute to this performance loss, making it impractical to model from
+first principles.  Instead, it is common to extract empirical performance loss rates (PLR)
+from performance measurements from fielded systems using statistical techniques.</p>
+<p>Many statistical techniques for PLR estimation have been proposed.  What has
+emerged as a de facto standard is the “year-on-year” (YOY) method as implemented
+in <a class="reference external" href="https://github.com/NREL/rdtools">RdTools</a>.  From a multi-year production
+timeseries dataset, the YOY method extracts an estimated PLR and associated
+confidence interval using a sequence of data filtering, normalization, aggregation,
+and bootstrapping steps.  The accuracy and uncertainty of the PLR estimate
+depend on the ability of these data processing steps to suppress the “noise”
+introduced by effects like resource variability and identify the underlying
+performance trend.  The longer the dataset being analyzed, and the more stable the
+climate, the more certain the PLR estimate becomes.</p>
+<p>This chapter examines the YOY method’s performance across climates, with the central
+question: <strong>how many years of data are needed to achieve a given level of certainty,
+and how does it vary across climates?</strong></p>
+</section>
+<section id="scenario-1-c-si">
+<h2>Scenario 1: c-Si<a class="headerlink" href="#scenario-1-c-si" title="Permalink to this headline">#</a></h2>
+<p>First, at the 50th percentile:</p>
+<div id="sidebar-1" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -505,7 +408,7 @@ in the upper right of the map.</p>
       init("1", ["synthetic-plr/can275_0.075_50.tiff", "synthetic-plr/can275_0.1_50.tiff", "synthetic-plr/can275_0.15_50.tiff", "synthetic-plr/can275_0.2_50.tiff"]);
   });
 </script>
-<p>Here is a second map:</p>
+<p>And again at the 90th:</p>
 <div id="sidebar-2" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -534,9 +437,170 @@ in the upper right of the map.</p>
 
 <script>
   $(window).on('load', function() {
-      init("2", ["synthetic-plr/fslr_0.075_50.tiff", "synthetic-plr/fslr_0.1_50.tiff", "synthetic-plr/fslr_0.15_50.tiff", "synthetic-plr/fslr_0.2_50.tiff"]);
+      init("2", ["synthetic-plr/can275_0.075_90.tiff", "synthetic-plr/can275_0.1_90.tiff", "synthetic-plr/can275_0.15_90.tiff", "synthetic-plr/can275_0.2_90.tiff"]);
   });
 </script>
+</section>
+<section id="scenario-2-cdte">
+<h2>Scenario 2: CdTe<a class="headerlink" href="#scenario-2-cdte" title="Permalink to this headline">#</a></h2>
+<p>Do these results depend significantly on the technology being examined?
+The following maps show the same analysis as above, but assuming First Solar
+Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
+<p>First, at the 50th percentile:</p>
+<div id="sidebar-3" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#calculations-3" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="calculations-3">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-3"></select></p>
+            <p>Layer 2: <select id="select-layer2-3"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-3" style="height: 400px; width: 100%"></div>
+
+<script>
+  $(window).on('load', function() {
+      init("3", ["synthetic-plr/fslr_0.075_50.tiff", "synthetic-plr/fslr_0.1_50.tiff", "synthetic-plr/fslr_0.15_50.tiff", "synthetic-plr/fslr_0.2_50.tiff"]);
+  });
+</script>
+<p>And again at the 90th:</p>
+<div id="sidebar-4" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#calculations-4" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="calculations-4">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-4"></select></p>
+            <p>Layer 2: <select id="select-layer2-4"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-4" style="height: 400px; width: 100%"></div>
+
+<script>
+  $(window).on('load', function() {
+      init("4", ["synthetic-plr/fslr_0.075_90.tiff", "synthetic-plr/fslr_0.1_90.tiff", "synthetic-plr/fslr_0.15_90.tiff", "synthetic-plr/fslr_0.2_90.tiff"]);
+  });
+</script>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="bibliography-1">
+<ol class="arabic simple" start="1">
+<li id="cite-1-deceglie2023"><p>Michael G. Deceglie, Kevin Anderson, Daniel Fregosi, William B. Hobbs, Mark A. Mikofski, Marios Theristis, and Bennet E. Meyers. Perspective: performance loss rate in photovoltaic systems. <em>Solar RRL</em>, June 2023. <a class="reference external" href="https://doi.org/10.1002/solr.202300196">doi:10.1002/solr.202300196</a>.</p></li>
+<li id="cite-1-jordan2022"><p>Dirk C. Jordan, Kevin Anderson, Kirsten Perry, Matthew Muller, Michael Deceglie, Robert White, and Chris Deline. Photovoltaic fleet degradation insights. <em>Progress in Photovoltaics: Research and Applications</em>, 30(10):1166–1175, April 2022. <a class="reference external" href="https://doi.org/10.1002/pip.3566">doi:10.1002/pip.3566</a>.</p></li>
+<li id="cite-1-theristis2023srrl"><p>Marios Theristis, Kevin Anderson, Julián Ascencio-Vásquez, and Joshua S. Stein. How climate and data quality impact photovoltaic performance loss rate estimations. <em>Solar RRL</em>, December 2023. <a class="reference external" href="https://doi.org/10.1002/solr.202300815">doi:10.1002/solr.202300815</a>.</p></li>
+</ol>
+</div>
+</section>
+<section id="data-files">
+<h2>Data files<a class="headerlink" href="#data-files" title="Permalink to this headline">#</a></h2>
+<table class="table">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GeoTIFF file</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.15_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.15_90.png" src="_images/fslr_0.15_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.075%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.15_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.15_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.15_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.15_50.png" src="_images/can275_0.15_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.075%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.15_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.15_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.1_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.1_50.png" src="_images/can275_0.1_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.05%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.1_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.1_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.075_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.075_50.png" src="_images/can275_0.075_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.0375%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.075_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.075_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.1_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.1_50.png" src="_images/fslr_0.1_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.05%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.1_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.1_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.075_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.075_50.png" src="_images/fslr_0.075_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.0375%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.075_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.075_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.15_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.15_50.png" src="_images/fslr_0.15_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.075%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.15_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.15_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.2_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.2_50.png" src="_images/can275_0.2_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.1%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.2_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.2_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.15_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.15_90.png" src="_images/can275_0.15_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.075%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.15_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.15_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.075_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.075_90.png" src="_images/fslr_0.075_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.0375%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.075_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.075_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.2_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.2_90.png" src="_images/fslr_0.2_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.1%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.2_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.2_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.2_50.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.2_50.png" src="_images/fslr_0.2_50.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.1%/year uncertainty at the 50% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.2_50.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.2_50.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.2_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.2_90.png" src="_images/can275_0.2_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.1%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.2_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.2_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.1_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.1_90.png" src="_images/can275_0.1_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.05%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.1_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.1_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.075_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/can275_0.075_90.png" src="_images/can275_0.075_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.0375%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for c-Si PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/can275_0.075_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;can275_0.075_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.1_90.tiff"><img alt="source/_static/thumbnails/geotiffs/synthetic-plr/fslr_0.1_90.png" src="_images/fslr_0.1_90.png" /></a></p></td>
+<td><p>Description: Years of data required to achieve +/- 0.05%/year uncertainty at the 90% confidence level for year-on-year PLR estimates for CdTe PV modules.<p><a class="reference external" href="geotiffs/synthetic-plr/fslr_0.1_90.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;fslr_0.1_90.tiff - [22.3 KiB]</a></p>
+</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -551,7 +615,7 @@ in the upper right of the map.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Interactive Map</p>
+            <p class="prev-next-title">Example Page</p>
         </div>
     </a>
 </div>

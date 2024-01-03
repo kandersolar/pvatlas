@@ -1,8 +1,8 @@
 
-Interactive Map
-===============
+Example Page
+============
 
-Click on the map to display information about the location.
+Hover over the map to display information about the location.
 Different layers can be displayed using the selection widget
 in the upper right of the map.
 
