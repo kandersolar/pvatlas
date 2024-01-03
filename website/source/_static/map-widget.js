@@ -97,7 +97,9 @@ function init(id, geotiffs){
   var map = L.map('map-' + id, {
       fullscreenControl: {
         pseudoFullscreen: true
-      }
+      },
+      minZoom: 4,
+      maxZoom: 6,
     }
   ).setView([38, -97], 4);
 
