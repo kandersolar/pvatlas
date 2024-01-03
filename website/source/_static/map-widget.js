@@ -51,7 +51,7 @@ function rasterToLayer(georaster, metadata){
 }
 
 
-function addLayer(filename, layerControl, name){
+function addLayer(filename, layerControl, name, order){
   fetch("./geotiffs/" + filename)
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
@@ -68,8 +68,9 @@ function addLayer(filename, layerControl, name){
             });
         });
 
-        console.log("metadata:", metadata);
         var layer = rasterToLayer(georaster, metadata);
+        layer.options.order = order;
+        layer.options.filename = filename;
         layerControl.addBaseLayer(layer, name);
     });
   });
@@ -115,12 +116,17 @@ function init(id, geotiffs){
   // overlays use checkboxes).  We always want the OSM layer active, so
   // just add it to the map, not the layer control.
 
-  var layerControl = L.control.layers({}).addTo(map);
+  var layerControl = L.control.layers({}, {}, {
+    sortLayers: true,
+    sortFunction: function (layerA, layerB){
+      return layerA.options.order - layerB.options.order;
+    }
+  }).addTo(map);
 
   var selectOptions = [];
-  geotiffs.forEach(function(fn){
+  geotiffs.forEach(function(fn, i){  // maintain order from the original layer list
     var name = fn.split("/").pop();  // only show the filename, not the full path
-    addLayer(fn, layerControl, name);
+    addLayer(fn, layerControl, name, i);
     selectOptions.push("<option value='" + name + "'>" + name + "</option>");
   });
 
