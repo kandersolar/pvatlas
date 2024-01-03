@@ -125,7 +125,7 @@ class GeotiffIndex(Directive):
         DATA_DIR = os.path.abspath('../data')
         pattern = self.options.get('pattern', None) or '**/*.tiff'
         print(f"pv atlas: looking for GeoTIFF files in {DATA_DIR} using pattern: {pattern}")
-        filenames = glob.glob(pattern, root_dir=DATA_DIR, recursive=True)
+        filenames = sorted(glob.glob(pattern, root_dir=DATA_DIR, recursive=True))
         print(f"pv atlas: found {len(filenames)} GeoTIFF files")
         
         records = []
