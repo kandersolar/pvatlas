@@ -184,16 +184,17 @@ class GeotiffIndex(Directive):
             linknode = nodes.reference('', '', internal=False, refuri=record['url'])
             linknode.append(nodes.image("", uri=record['thumbnail'], alt=record['thumbnail']))
             thumbnailnode += linknode
-            
             row += nodes.entry('', thumbnailnode)
             
             description = nodes.paragraph('', nodes.Text("Description: " + record['description']))
-            fileinfo = nodes.paragraph('', nodes.Text("Download: "))
+            downloadinfo = nodes.paragraph()
             linknode = nodes.reference('', '', internal=False, refuri=record['url'])
+            linknode.append(nodes.raw("", '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;', format="html"))
             linknode.append(nodes.Text(record['displayname'] + " - [" + record['filesize'] + "]"))
-            fileinfo += linknode
-            description.append(fileinfo)
+            downloadinfo += linknode
+            description.append(downloadinfo)
             row += nodes.entry('', description)
+            
             body += row
 
         return [table]
