@@ -40,8 +40,13 @@ This project uses many open-source software packages, including:
 
 Outputs
 -------
-GeoTIFF
+The geographic data visualized in the interactive maps are available for public
+download in the form of geo-referenced GeoTIFF files.  GeoTIFF is a standard
+format for these kinds of rasterized geographic datasets.  Making the datasets
+public allows users to import the analysis results into Python, GIS tools, or
+other computing environments for further processing.
 
+For details, see :ref:`data-access`.
 
 References
 ----------

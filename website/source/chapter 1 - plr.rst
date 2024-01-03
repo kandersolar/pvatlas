@@ -30,6 +30,11 @@ question: **how many years of data are needed to achieve a given level of certai
 and how does it vary across climates?**
 
 
+Scenario 1: c-Si
+----------------
+
+First, at the 50th percentile:
+
 .. map-widget:: 
     :id: 1
 
@@ -38,6 +43,7 @@ and how does it vary across climates?**
     synthetic-plr/can275_0.15_50.tiff
     synthetic-plr/can275_0.2_50.tiff
 
+And again at the 90th:
 
 .. map-widget:: 
     :id: 2
@@ -48,9 +54,14 @@ and how does it vary across climates?**
     synthetic-plr/can275_0.2_90.tiff
 
 
+Scenario 2: CdTe
+----------------
+
 Do these results depend significantly on the technology being examined?
-The following maps show the same thing as above, but assuming First Solar
-Cadmium Telluride PV modules instead of crystalline silicon:
+The following maps show the same analysis as above, but assuming First Solar
+Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.
+
+First, at the 50th percentile:
 
 .. map-widget:: 
     :id: 3
@@ -60,6 +71,8 @@ Cadmium Telluride PV modules instead of crystalline silicon:
     synthetic-plr/fslr_0.15_50.tiff
     synthetic-plr/fslr_0.2_50.tiff
 
+
+And again at the 90th:
 
 .. map-widget:: 
     :id: 4
@@ -87,3 +100,4 @@ Data files
 
 .. geotiff-index::
     :pattern: geotiffs/synthetic-plr/*.tiff
+
