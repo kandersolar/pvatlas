@@ -51,7 +51,7 @@ function rasterToLayer(georaster, metadata){
 }
 
 
-function addLayer(filename, layerControl, name, order){
+function addLayer(filename, map, layerControl, name, order){
   fetch("./geotiffs/" + filename)
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
@@ -72,6 +72,10 @@ function addLayer(filename, layerControl, name, order){
         layer.options.order = order;
         layer.options.filename = filename;
         layerControl.addBaseLayer(layer, name);
+        if(order == 0){
+          // make the first layer visible by default
+          layer.addTo(map);
+        }
     });
   });
 }
@@ -128,7 +132,7 @@ function init(id, geotiffs){
   var selectOptions = [];
   geotiffs.forEach(function(fn, i){  // maintain order from the original layer list
     var name = fn.split("/").pop();  // only show the filename, not the full path
-    addLayer(fn, layerControl, name, i);
+    addLayer(fn, map, layerControl, name, i);
     selectOptions.push("<option value='" + name + "'>" + name + "</option>");
   });
 
