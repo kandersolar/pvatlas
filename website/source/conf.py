@@ -152,9 +152,9 @@ class GeotiffIndex(Directive):
                 'description': rds.attrs.get('DESCRIPTION', '-'),
                 'date': rds.attrs.get('CREATION_DATE', '-'),
                 'displayname': os.path.split(filename)[-1],
-                'url': filename.replace('\\', '/'),  # location within the data directory
+                'url': filename.replace(os.sep, '/'),  # location within the data directory
                 'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
-                'thumbnail': image_filepath.replace("source\\", ""),
+                'thumbnail': image_filepath.replace("source" + os.sep, ""),
             })
 
             
