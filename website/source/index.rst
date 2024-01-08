@@ -30,6 +30,19 @@ This material is based upon work supported by the U.S. Department of
 Energy's Office of Energy Efficiency and Renewable Energy (EERE) under
 the Solar Energy Technologies Office Award Number 38267.
 
+Free and open-source software is a key enabler of modern scientific computing.
+This project uses many open-source software packages, including:
+
+- `pvlib <https://pvlib-python.readthedocs.io>`_: PV performance modeling
+- `RdTools <https://rdtools.readthedocs.io>`_: performance loss rate estimation
+- `leaflet <https://leaflet.js/>`_, `georaster <https://github.com/GeoTIFF/georaster>`_, `cartopy <https://scitools.org.uk/cartopy/docs/latest/>`_: mapping
+- `matplotlib <https://matplotlib.org/>`_: plotting
+- `pandas <https://pandas.pydata.org/docs>`_, `numpy <https://numpy.org/doc/stable/>`_: number crunching
+- `sphinx <https://www.sphinx-doc.org>`_, `sphinx-book-theme <https://sphinx-book-theme.readthedocs.io>`_: building this website
+- `rasterio <https://rasterio.readthedocs.io>`_, `rioxarray <https://corteva.github.io/rioxarray/stable/>`_, `GDAL <https://gdal.org/index.html>`_: geospatial rasters
+- and many others
+
+
 
 .. toctree::
    :hidden:
@@ -38,8 +51,9 @@ the Solar Energy Technologies Office Award Number 38267.
 
    self
    methodology
-   publications
    data
+   publications
+
 
 .. toctree::
    :hidden:
