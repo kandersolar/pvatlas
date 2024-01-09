@@ -82,16 +82,16 @@ class MapWidget(Directive):
     required_arguments = 0
     optional_arguments = 0
     has_content = True
-    option_spec = {'id': directives.unchanged_required}
+    option_spec = {}
 
     def run(self):
         filenames = filter(lambda s: s != '', self.content)
-
+        uuid = self.state.document.settings.env.new_serialno('map-widget')
         geotiffs_text = ", ".join(f'"{fn}"' for fn in filenames)
         # TODO: use jinja instead of this hacky templating
         html = (MAP_HTML_TEMPLATE
             .replace("##GEOTIFFS##", geotiffs_text)
-            .replace("##ID##", self.options['id'])
+            .replace("##ID##", str(uuid))
         )
         
         node = nodes.raw('', html, format='html')
