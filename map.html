@@ -280,6 +280,38 @@ in the upper right of the map.</p>
 
 <script src="_static/map-widget.js"></script>
 
+<div id="sidebar-0" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#calculations-0" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="calculations-0">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-0"></select></p>
+            <p>Layer 2: <select id="select-layer2-0"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-0" style="height: 400px; width: 100%"></div>
+
+<script>
+  $(window).on('load', function() {
+      init("0", ["ft-20_all-sky_0.00.tiff", "ft-20_all-sky_0.85.tiff", "ft-lat_all-sky_0.00.tiff"]);
+  });
+</script>
+<p>Here is a second map:</p>
 <div id="sidebar-1" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -308,39 +340,7 @@ in the upper right of the map.</p>
 
 <script>
   $(window).on('load', function() {
-      init("1", ["ft-20_all-sky_0.00.tiff", "ft-20_all-sky_0.85.tiff", "ft-lat_all-sky_0.00.tiff"]);
-  });
-</script>
-<p>Here is a second map:</p>
-<div id="sidebar-2" class="leaflet-sidebar collapsed">
-    <!-- Nav tabs -->
-    <div class="leaflet-sidebar-tabs">
-        <ul role="tablist"> <!-- top aligned tabs -->
-            <li><a href="#calculations-2" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
-        </ul>
-    </div>
- 
-    <!-- Tab panes -->
-    <div class="leaflet-sidebar-content">
-        <div class="leaflet-sidebar-pane" id="calculations-2">
-            <h1 class="leaflet-sidebar-header" style="color: #fff">
-              Calculations
-              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
-            </h1>
-            
-            <p>Calculate and show the difference between two layers:
-            
-            <p>Layer 1: <select id="select-layer1-2"></select></p>
-            <p>Layer 2: <select id="select-layer2-2"></select></p>
-        </div>
-    </div>
-</div>
-
-<div id="map-2" style="height: 400px; width: 100%"></div>
-
-<script>
-  $(window).on('load', function() {
-      init("2", ["ft-20_all-sky_0.00.tiff", "sat_all-sky_0.00.tiff"]);
+      init("1", ["ft-20_all-sky_0.00.tiff", "sat_all-sky_0.00.tiff"]);
   });
 </script>
 </section>

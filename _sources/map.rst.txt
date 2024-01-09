@@ -9,7 +9,6 @@ in the upper right of the map.
 .. map-header::
 
 .. map-widget:: 
-    :id: 1
 
     ft-20_all-sky_0.00.tiff
     ft-20_all-sky_0.85.tiff
@@ -18,7 +17,6 @@ in the upper right of the map.
 Here is a second map:
 
 .. map-widget:: 
-    :id: 2
 
     ft-20_all-sky_0.00.tiff
     sat_all-sky_0.00.tiff

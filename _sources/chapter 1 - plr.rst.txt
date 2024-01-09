@@ -36,7 +36,6 @@ Scenario 1: c-Si
 First, at the 50th percentile:
 
 .. map-widget:: 
-    :id: 1
 
     synthetic-plr/can275_0.075_50.tiff
     synthetic-plr/can275_0.1_50.tiff
@@ -46,7 +45,6 @@ First, at the 50th percentile:
 And again at the 90th:
 
 .. map-widget:: 
-    :id: 2
 
     synthetic-plr/can275_0.075_90.tiff
     synthetic-plr/can275_0.1_90.tiff
@@ -64,7 +62,6 @@ Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.
 First, at the 50th percentile:
 
 .. map-widget:: 
-    :id: 3
 
     synthetic-plr/fslr_0.075_50.tiff
     synthetic-plr/fslr_0.1_50.tiff
@@ -75,7 +72,6 @@ First, at the 50th percentile:
 And again at the 90th:
 
 .. map-widget:: 
-    :id: 4
 
     synthetic-plr/fslr_0.075_90.tiff
     synthetic-plr/fslr_0.1_90.tiff

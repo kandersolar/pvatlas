@@ -377,6 +377,38 @@ and how does it vary across climates?</strong></p>
 <section id="scenario-1-c-si">
 <h2>Scenario 1: c-Si<a class="headerlink" href="#scenario-1-c-si" title="Permalink to this headline">#</a></h2>
 <p>First, at the 50th percentile:</p>
+<div id="sidebar-0" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#calculations-0" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="calculations-0">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-0"></select></p>
+            <p>Layer 2: <select id="select-layer2-0"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-0" style="height: 400px; width: 100%"></div>
+
+<script>
+  $(window).on('load', function() {
+      init("0", ["synthetic-plr/can275_0.075_50.tiff", "synthetic-plr/can275_0.1_50.tiff", "synthetic-plr/can275_0.15_50.tiff", "synthetic-plr/can275_0.2_50.tiff"]);
+  });
+</script>
+<p>And again at the 90th:</p>
 <div id="sidebar-1" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -405,10 +437,16 @@ and how does it vary across climates?</strong></p>
 
 <script>
   $(window).on('load', function() {
-      init("1", ["synthetic-plr/can275_0.075_50.tiff", "synthetic-plr/can275_0.1_50.tiff", "synthetic-plr/can275_0.15_50.tiff", "synthetic-plr/can275_0.2_50.tiff"]);
+      init("1", ["synthetic-plr/can275_0.075_90.tiff", "synthetic-plr/can275_0.1_90.tiff", "synthetic-plr/can275_0.15_90.tiff", "synthetic-plr/can275_0.2_90.tiff"]);
   });
 </script>
-<p>And again at the 90th:</p>
+</section>
+<section id="scenario-2-cdte">
+<h2>Scenario 2: CdTe<a class="headerlink" href="#scenario-2-cdte" title="Permalink to this headline">#</a></h2>
+<p>Do these results depend significantly on the technology being examined?
+The following maps show the same analysis as above, but assuming First Solar
+Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
+<p>First, at the 50th percentile:</p>
 <div id="sidebar-2" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -437,16 +475,10 @@ and how does it vary across climates?</strong></p>
 
 <script>
   $(window).on('load', function() {
-      init("2", ["synthetic-plr/can275_0.075_90.tiff", "synthetic-plr/can275_0.1_90.tiff", "synthetic-plr/can275_0.15_90.tiff", "synthetic-plr/can275_0.2_90.tiff"]);
+      init("2", ["synthetic-plr/fslr_0.075_50.tiff", "synthetic-plr/fslr_0.1_50.tiff", "synthetic-plr/fslr_0.15_50.tiff", "synthetic-plr/fslr_0.2_50.tiff"]);
   });
 </script>
-</section>
-<section id="scenario-2-cdte">
-<h2>Scenario 2: CdTe<a class="headerlink" href="#scenario-2-cdte" title="Permalink to this headline">#</a></h2>
-<p>Do these results depend significantly on the technology being examined?
-The following maps show the same analysis as above, but assuming First Solar
-Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
-<p>First, at the 50th percentile:</p>
+<p>And again at the 90th:</p>
 <div id="sidebar-3" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -475,39 +507,7 @@ Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
 
 <script>
   $(window).on('load', function() {
-      init("3", ["synthetic-plr/fslr_0.075_50.tiff", "synthetic-plr/fslr_0.1_50.tiff", "synthetic-plr/fslr_0.15_50.tiff", "synthetic-plr/fslr_0.2_50.tiff"]);
-  });
-</script>
-<p>And again at the 90th:</p>
-<div id="sidebar-4" class="leaflet-sidebar collapsed">
-    <!-- Nav tabs -->
-    <div class="leaflet-sidebar-tabs">
-        <ul role="tablist"> <!-- top aligned tabs -->
-            <li><a href="#calculations-4" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
-        </ul>
-    </div>
- 
-    <!-- Tab panes -->
-    <div class="leaflet-sidebar-content">
-        <div class="leaflet-sidebar-pane" id="calculations-4">
-            <h1 class="leaflet-sidebar-header" style="color: #fff">
-              Calculations
-              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
-            </h1>
-            
-            <p>Calculate and show the difference between two layers:
-            
-            <p>Layer 1: <select id="select-layer1-4"></select></p>
-            <p>Layer 2: <select id="select-layer2-4"></select></p>
-        </div>
-    </div>
-</div>
-
-<div id="map-4" style="height: 400px; width: 100%"></div>
-
-<script>
-  $(window).on('load', function() {
-      init("4", ["synthetic-plr/fslr_0.075_90.tiff", "synthetic-plr/fslr_0.1_90.tiff", "synthetic-plr/fslr_0.15_90.tiff", "synthetic-plr/fslr_0.2_90.tiff"]);
+      init("3", ["synthetic-plr/fslr_0.075_90.tiff", "synthetic-plr/fslr_0.1_90.tiff", "synthetic-plr/fslr_0.15_90.tiff", "synthetic-plr/fslr_0.2_90.tiff"]);
   });
 </script>
 </section>
