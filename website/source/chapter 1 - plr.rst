@@ -37,19 +37,19 @@ First, at the 50th percentile:
 
 .. map-widget:: 
 
-    synthetic-plr/can275_0.075_50.tiff
-    synthetic-plr/can275_0.1_50.tiff
-    synthetic-plr/can275_0.15_50.tiff
-    synthetic-plr/can275_0.2_50.tiff
+    synthetic-plr/can275_0.075_50.tiff : ±0.0375 %/year
+    synthetic-plr/can275_0.1_50.tiff : ±0.05 %/year
+    synthetic-plr/can275_0.15_50.tiff : ±0.075 %/year
+    synthetic-plr/can275_0.2_50.tiff : ±0.1 %/year
 
 And again at the 90th:
 
 .. map-widget:: 
 
-    synthetic-plr/can275_0.075_90.tiff
-    synthetic-plr/can275_0.1_90.tiff
-    synthetic-plr/can275_0.15_90.tiff
-    synthetic-plr/can275_0.2_90.tiff
+    synthetic-plr/can275_0.075_90.tiff : ±0.0375 %/year
+    synthetic-plr/can275_0.1_90.tiff : ±0.05 %/year
+    synthetic-plr/can275_0.15_90.tiff : ±0.075 %/year
+    synthetic-plr/can275_0.2_90.tiff : ±0.1 %/year
 
 
 Scenario 2: CdTe

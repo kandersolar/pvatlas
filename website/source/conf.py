@@ -52,6 +52,7 @@ from docutils import nodes
 
 import glob
 import os
+import json
 import rioxarray
 import pandas as pd
 import numpy as np
@@ -84,13 +85,34 @@ class MapWidget(Directive):
     has_content = True
     option_spec = {}
 
+
+    def _parse_layer_specs(self, raw_specs):
+        specs = []
+        for raw_spec in raw_specs:
+            if ":" in raw_spec:
+                filename, label = raw_spec.split(":", 1)
+            else:
+                # if no label supplied, fall back to just using the filename
+                filename = label = raw_spec
+
+            label = label.strip()
+            filename = filename.strip()
+            specs.append({
+                'label': label,
+                'filename': filename,
+            })
+        return specs
+
+
     def run(self):
-        filenames = filter(lambda s: s != '', self.content)
+        
+        raw_specs = filter(lambda s: s != '', self.content)
+        specs = self._parse_layer_specs(raw_specs)
+        
         uuid = self.state.document.settings.env.new_serialno('map-widget')
-        geotiffs_text = ", ".join(f'"{fn}"' for fn in filenames)
         # TODO: use jinja instead of this hacky templating
         html = (MAP_HTML_TEMPLATE
-            .replace("##GEOTIFFS##", geotiffs_text)
+            .replace("##GEOTIFFS##", json.dumps(specs))
             .replace("##ID##", str(uuid))
         )
         
