@@ -83,8 +83,11 @@ class MapWidget(Directive):
     required_arguments = 0
     optional_arguments = 0
     has_content = True
-    option_spec = {}
-
+    option_spec = {
+        'colorscale_min' : float,
+        'colorscale_max': float,
+        'colorscale_name': str,
+    }
 
     def _parse_layer_specs(self, raw_specs):
         specs = []
@@ -111,11 +114,18 @@ class MapWidget(Directive):
         
         uuid = self.state.document.settings.env.new_serialno('map-widget')
         # TODO: use jinja instead of this hacky templating
-        html = (MAP_HTML_TEMPLATE
-            .replace("##GEOTIFFS##", json.dumps(specs))
-            .replace("##ID##", str(uuid))
+        options = {
+            'id': str(uuid),
+            'geotiffSpecs': specs,
+            'colorscale_min': self.options.get('colorscale_min', ''),
+            'colorscale_max': self.options.get('colorscale_max', ''),
+            'colorscale_name': self.options.get('colorscale_name', ''),
+        }
+        html = (
+            MAP_HTML_TEMPLATE
+            .replace("##OPTIONS##", json.dumps(options))
+            .replace("##ID##", options['id'])
         )
-        
         node = nodes.raw('', html, format='html')
         return [node]
 
@@ -145,7 +155,7 @@ class GeotiffIndex(Directive):
         os.makedirs(images_directory, exist_ok=True)
         
         DATA_DIR = os.path.abspath('../data')
-        pattern = self.options.get('pattern', None) or '**/*.tiff'
+        pattern = self.options.get('pattern', '**/*.tiff')
         print(f"pv atlas: looking for GeoTIFF files in {DATA_DIR} using pattern: {pattern}")
         filenames = sorted(glob.glob(pattern, root_dir=DATA_DIR, recursive=True))
         print(f"pv atlas: found {len(filenames)} GeoTIFF files")

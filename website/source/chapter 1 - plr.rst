@@ -62,6 +62,9 @@ Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.
 First, at the 50th percentile:
 
 .. map-widget:: 
+   :colorscale_min: 2
+   :colorscale_max: 10
+   :colorscale_name: Spectral
 
     synthetic-plr/fslr_0.075_50.tiff
     synthetic-plr/fslr_0.1_50.tiff

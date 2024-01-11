@@ -17,13 +17,26 @@ L.Control.Layers.include({
 });
 
 
-function rasterToLayer(georaster, metadata){
+function rasterToLayer(georaster, metadata, options){
   // console.log(chroma.brewer);
-  var scale = chroma.scale("Viridis");
 
-  const min = georaster.mins[0];
-  const max = georaster.maxs[0];
-  const range = georaster.ranges[0];
+  // default values, to be optionally overridden by configuration in RST
+  var min = georaster.mins[0];
+  var max = georaster.maxs[0];
+  var name = 'Viridis';
+  // overrides:
+  if(options.colorscale_min != ''){
+    min = options.colorscale_min;
+  }
+  if(options.colorscale_max != ''){
+    max = options.colorscale_max;
+  }
+  if(options.colorscale_name != ''){
+    name = options.colorscale_name;
+  }
+
+  var range = max - min;
+  var scale = chroma.scale(name);
 
   var description = null;
   if(metadata !== null){
@@ -51,7 +64,7 @@ function rasterToLayer(georaster, metadata){
 }
 
 
-function addLayer(filename, map, layerControl, name, order){
+function addLayer(filename, map, layerControl, name, order, options){
   fetch("./geotiffs/" + filename)
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
@@ -68,7 +81,7 @@ function addLayer(filename, map, layerControl, name, order){
             });
         });
 
-        var layer = rasterToLayer(georaster, metadata);
+        var layer = rasterToLayer(georaster, metadata, options);
         layer.options.order = order;
         layer.options.filename = filename;
         layerControl.addBaseLayer(layer, name);
@@ -97,7 +110,8 @@ async function doArithmetic(operation, layer1, layer2){
 }
 
 
-function init(id, geotiffSpecs){
+function init(id, options){
+  
   var map = L.map('map-' + id, {
       fullscreenControl: {
         pseudoFullscreen: true
@@ -130,10 +144,10 @@ function init(id, geotiffSpecs){
   }).addTo(map);
 
   var selectOptions = [];
-  geotiffSpecs.forEach(function(spec, i){  // maintain order from the original layer list
+  options.geotiffSpecs.forEach(function(spec, i){  // maintain order from the original layer list
     var uri = spec.filename;
     var label = spec.label;  // layer label defined in RST file
-    addLayer(uri, map, layerControl, label, i);
+    addLayer(uri, map, layerControl, label, i, options);
     selectOptions.push("<option value='" + label + "'>" + label + "</option>");
   });
 
