@@ -308,7 +308,7 @@ in the upper right of the map.</p>
 
 <script>
   $(window).on('load', function() {
-      init("0", [{"label": "layer label 1", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "layer labe 2", "filename": "ft-20_all-sky_0.85.tiff"}, {"label": "another layer", "filename": "ft-lat_all-sky_0.00.tiff"}]);
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "layer label 1", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "layer labe 2", "filename": "ft-20_all-sky_0.85.tiff"}, {"label": "another layer", "filename": "ft-lat_all-sky_0.00.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
   });
 </script>
 <p>Here is a second map:</p>
@@ -340,7 +340,7 @@ in the upper right of the map.</p>
 
 <script>
   $(window).on('load', function() {
-      init("1", [{"label": "ft-20_all-sky_0.00.tiff", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "sat_all-sky_0.00.tiff", "filename": "sat_all-sky_0.00.tiff"}]);
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "ft-20_all-sky_0.00.tiff", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "sat_all-sky_0.00.tiff", "filename": "sat_all-sky_0.00.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
   });
 </script>
 </section>
