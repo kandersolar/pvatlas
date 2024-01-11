@@ -97,7 +97,7 @@ async function doArithmetic(operation, layer1, layer2){
 }
 
 
-function init(id, geotiffs){
+function init(id, geotiffSpecs){
   var map = L.map('map-' + id, {
       fullscreenControl: {
         pseudoFullscreen: true
@@ -130,10 +130,11 @@ function init(id, geotiffs){
   }).addTo(map);
 
   var selectOptions = [];
-  geotiffs.forEach(function(fn, i){  // maintain order from the original layer list
-    var name = fn.split("/").pop();  // only show the filename, not the full path
-    addLayer(fn, map, layerControl, name, i);
-    selectOptions.push("<option value='" + name + "'>" + name + "</option>");
+  geotiffSpecs.forEach(function(spec, i){  // maintain order from the original layer list
+    var uri = spec.filename;
+    var label = spec.label;  // layer label defined in RST file
+    addLayer(uri, map, layerControl, label, i);
+    selectOptions.push("<option value='" + label + "'>" + label + "</option>");
   });
 
 
