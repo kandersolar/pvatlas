@@ -31,7 +31,7 @@ def write_geotiff(data, filename, description, metadata=None, nodata=np.float32(
     y = data.index
     xres = x[1] - x[0]
     yres = y[1] - y[0]
-    transform = Affine.translation(x[0] - xres / 2, y[-1] - yres / 2) * Affine.scale(xres, -yres)
+    transform = Affine.translation(x[0] - xres / 2, y[-1] + yres / 2) * Affine.scale(xres, -yres)
     data = np.flipud(data.fillna(nodata).values.astype(np.float32))
     
     if metadata is None:
@@ -56,3 +56,25 @@ def write_geotiff(data, filename, description, metadata=None, nodata=np.float32(
         dst.write(data, 1)
         dst.update_tags(DESCRIPTION=description, **metadata)
 
+
+# %%
+
+if __name__ == "__main__":
+    import glob
+    import pandas as pd
+
+    d = r'C:\Users\ksande\Downloads\synthetic-plr-heatmaps-bundle'
+    for fp in glob.glob(d + "\\*.parquet"):
+        df = pd.read_parquet(fp)
+        df = df.replace(0, np.nan)
+        
+        module, ci_width, tail = fp.split("\\")[-1].split("_")
+        fraction, _ = tail.split(".")
+        module = {"fslr": "CdTe", "can275": "c-Si"}[module]
+        
+        description = (
+            f"Years of data required to achieve +/- {float(ci_width)/2}%/year uncertainty "
+            f"at the {fraction}% confidence level for year-on-year PLR estimates "
+            f"for {module} PV modules."
+        )
+        write_geotiff(df, fp.replace(".parquet", ".tiff"), description)
