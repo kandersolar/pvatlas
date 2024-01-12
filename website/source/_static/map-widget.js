@@ -172,7 +172,7 @@ function init(id, options){
       minZoom: 4,
       maxZoom: 6,
     }
-  ).setView([38, -97], 4);
+  ).setView([37, -97], 4);
 
   var sidebar = L.control.sidebar({
     container: 'sidebar-' + id,
