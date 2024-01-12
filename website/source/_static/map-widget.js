@@ -143,6 +143,14 @@ function init(id, options){
     }
   }).addTo(map);
 
+  if(options.layers_title !== undefined && options.layers_title != ''){
+    var titleElement = L.DomUtil.create('label');
+    titleElement.setAttribute("style", "text-align:center;");
+    titleElement.innerHTML = options.layers_title;
+    var layerControlElement = layerControl.getContainer().querySelector('.leaflet-control-layers-list');
+    layerControlElement.insertBefore(titleElement, layerControlElement.firstChild);
+  }
+  
   var selectOptions = [];
   options.geotiffSpecs.forEach(function(spec, i){  // maintain order from the original layer list
     var uri = spec.filename;

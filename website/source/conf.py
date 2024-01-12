@@ -87,6 +87,7 @@ class MapWidget(Directive):
         'colorscale_min' : float,
         'colorscale_max': float,
         'colorscale_name': str,
+        'layers_title': str,
     }
 
     def _parse_layer_specs(self, raw_specs):
@@ -117,10 +118,14 @@ class MapWidget(Directive):
         options = {
             'id': str(uuid),
             'geotiffSpecs': specs,
-            'colorscale_min': self.options.get('colorscale_min', ''),
-            'colorscale_max': self.options.get('colorscale_max', ''),
-            'colorscale_name': self.options.get('colorscale_name', ''),
         }
+        keys = [
+            'colorscale_min', 'colorscale_max', 'colorscale_name',
+            'layers_title',
+        ]
+        for key in keys:
+            options[key] = self.options.get(key, '')
+        
         html = (
             MAP_HTML_TEMPLATE
             .replace("##OPTIONS##", json.dumps(options))
