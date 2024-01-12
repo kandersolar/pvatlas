@@ -1,3 +1,5 @@
+const COLORSCALE_OPACITY = 0.7;
+
 L.Control.Layers.include({
   getOverlays: function() {
     var control = this;
@@ -49,7 +51,7 @@ function rasterToLayer(georaster, metadata, options){
 
   var layer = new GeoRasterLayer({
     georaster: georaster,
-    opacity: 0.7,
+    opacity: COLORSCALE_OPACITY,
     pixelValuesToColorFn: function(pixelValues) {
       var pixelValue = pixelValues[0]; // use value in first band
       if (pixelValue === -9999) return null;
@@ -120,7 +122,7 @@ function makeColorBarSVG(stops, ticks, container, id){
   }
   gradientHTML += "</linearGradient></svg>";
 
-  var colorBarHTML = '<svg width="100%" height="30%" y="10%"><rect fill="url(#lg-' + id + ')" x="5%" y="0%" width="90%" height="100%"/></svg>';
+  var colorBarHTML = '<svg width="100%" height="30%" y="10%"><rect fill-opacity="' + COLORSCALE_OPACITY + '" fill="url(#lg-' + id + ')" x="5%" y="0%" width="90%" height="100%"/></svg>';
 
   var tickLabelHTML = '<svg width="100%" height="60%" y="40%">';
   for(var i = 0; i < ticks.x.length; i++){
