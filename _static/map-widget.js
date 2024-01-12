@@ -1,3 +1,5 @@
+const COLORSCALE_OPACITY = 0.7;
+
 L.Control.Layers.include({
   getOverlays: function() {
     var control = this;
@@ -49,7 +51,7 @@ function rasterToLayer(georaster, metadata, options){
 
   var layer = new GeoRasterLayer({
     georaster: georaster,
-    opacity: 0.7,
+    opacity: COLORSCALE_OPACITY,
     pixelValuesToColorFn: function(pixelValues) {
       var pixelValue = pixelValues[0]; // use value in first band
       if (pixelValue === -9999) return null;
@@ -110,6 +112,59 @@ async function doArithmetic(operation, layer1, layer2){
 }
 
 
+function makeColorBarSVG(stops, ticks, container, id){
+
+  var gradientHTML = '<svg width="100%" height="0%"><linearGradient id="lg-' + id + '">';
+  for(var i = 0; i < stops.x.length; i++){
+    var percentage = stops.x[i] * 100;
+    var color = stops.c[i];
+    gradientHTML += "<stop offset=" + percentage + "% stop-color='" + color + "'/>"
+  }
+  gradientHTML += "</linearGradient></svg>";
+
+  var colorBarHTML = '<svg width="100%" height="30%" y="10%"><rect fill-opacity="' + COLORSCALE_OPACITY + '" fill="url(#lg-' + id + ')" x="5%" y="0%" width="90%" height="100%"/></svg>';
+
+  var tickLabelHTML = '<svg width="100%" height="60%" y="40%">';
+  for(var i = 0; i < ticks.x.length; i++){
+    var fraction = ticks.x[i];
+    var label = ticks.labels[i];
+    var position = 100 * (0.05 + fraction * 0.9);
+    tickLabelHTML += '<rect fill="#000000" x="' + (position - 0.25/2) + '%" y="0%" width="0.25%" height="20%"/>';
+    tickLabelHTML += '<text fill="#000000" x="' + position + '%" y="80%" font-family="sans-serif" font-size="14px" text-anchor="middle">' + label + '</text>';
+  }
+  tickLabelHTML += '</svg>';
+  
+  var html = '<svg width="100%" height="100%"">' + gradientHTML + colorBarHTML + tickLabelHTML + "</svg>";
+  return html;
+}
+
+function makeColorScale(vmin, vmax, name, container, id){
+  var scale = chroma.scale(name);
+  var nstops = 10;
+  var xs = [];
+  var cs = [];
+  for(var i = 0; i < nstops; i++){
+    var x = i / (nstops - 1);
+    var c = scale(x).hex();
+    xs.push(x);
+    cs.push(c);
+  }
+  var stops = {x: xs, c: cs};
+  
+  var nticks = 3;
+  var xs = [];
+  var labels = [];
+  for(var i = 0; i < nticks; i++){
+    var x = i / (nticks - 1);
+    var label = (vmin + x * (vmax - vmin)).toFixed(1);
+    xs.push(x);
+    labels.push(label);
+  }
+  var ticks = {x: xs, labels: labels};
+  return makeColorBarSVG(stops, ticks, container, id);
+}
+
+
 function init(id, options){
   
   var map = L.map('map-' + id, {
@@ -119,12 +174,31 @@ function init(id, options){
       minZoom: 4,
       maxZoom: 6,
     }
-  ).setView([38, -97], 4);
+  ).setView([37, -97], 4);
 
   var sidebar = L.control.sidebar({
     container: 'sidebar-' + id,
     position: 'left',
   }).addTo(map);
+
+  // colorbar
+  if(options.colorscale_name !== '' && options.colorscale_min !== '' && options.colorscale_name !== ''){
+    L.Control.colorbar = L.Control.extend({
+       onAdd: function(map) {
+         var container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-control');
+         container.id = "colorbar-" + id;
+         container.style = "height:40px; width:300px";
+         container.innerHTML = makeColorScale(options.colorscale_min, options.colorscale_max, 
+                                              options.colorscale_name, container, id);
+         return container;
+      },
+      onRemove: function(map) {
+        // Nothing to do here
+      }
+    });
+    L.control.colorbar = function(opts) { return new L.Control.colorbar(opts);}
+    L.control.colorbar({ position: 'topright' }).addTo(map);
+  }
 
   var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -143,6 +217,14 @@ function init(id, options){
     }
   }).addTo(map);
 
+  if(options.layers_title !== undefined && options.layers_title != ''){
+    var titleElement = L.DomUtil.create('label');
+    titleElement.setAttribute("style", "text-align:center;");
+    titleElement.innerHTML = options.layers_title;
+    var layerControlElement = layerControl.getContainer().querySelector('.leaflet-control-layers-list');
+    layerControlElement.insertBefore(titleElement, layerControlElement.firstChild);
+  }
+  
   var selectOptions = [];
   options.geotiffSpecs.forEach(function(spec, i){  // maintain order from the original layer list
     var uri = spec.filename;

@@ -11,7 +11,6 @@ in the upper right of the map.
 .. map-widget:: 
 
     ft-20_all-sky_0.00.tiff : layer label 1
-    ft-20_all-sky_0.85.tiff : layer labe 2 
     ft-lat_all-sky_0.00.tiff : another layer
 
 Here is a second map:

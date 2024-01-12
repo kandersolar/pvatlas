@@ -377,7 +377,7 @@ and how does it vary across climates?</strong></p>
 <section id="scenario-1-c-si">
 <h2>Scenario 1: c-Si<a class="headerlink" href="#scenario-1-c-si" title="Permalink to this headline">#</a></h2>
 <p>First, at the 50th percentile:</p>
-<div id="sidebar-0" class="leaflet-sidebar collapsed">
+<div id="sidebar-0" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -401,15 +401,15 @@ and how does it vary across climates?</strong></p>
     </div>
 </div>
 
-<div id="map-0" style="height: 400px; width: 100%"></div>
+<div id="map-0" style="height: 500px; width: 100%"></div>
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "\u00b10.0375 %/year", "filename": "synthetic-plr/can275_0.075_50.tiff"}, {"label": "\u00b10.05 %/year", "filename": "synthetic-plr/can275_0.1_50.tiff"}, {"label": "\u00b10.075 %/year", "filename": "synthetic-plr/can275_0.15_50.tiff"}, {"label": "\u00b10.1 %/year", "filename": "synthetic-plr/can275_0.2_50.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "\u00b10.0375 %/year", "filename": "synthetic-plr/can275_0.075_50.tiff"}, {"label": "\u00b10.05 %/year", "filename": "synthetic-plr/can275_0.1_50.tiff"}, {"label": "\u00b10.075 %/year", "filename": "synthetic-plr/can275_0.15_50.tiff"}, {"label": "\u00b10.1 %/year", "filename": "synthetic-plr/can275_0.2_50.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Viridis", "layers_title": "PLR Uncertainty:"});
   });
 </script>
 <p>And again at the 90th:</p>
-<div id="sidebar-1" class="leaflet-sidebar collapsed">
+<div id="sidebar-1" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -433,11 +433,11 @@ and how does it vary across climates?</strong></p>
     </div>
 </div>
 
-<div id="map-1" style="height: 400px; width: 100%"></div>
+<div id="map-1" style="height: 500px; width: 100%"></div>
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "\u00b10.0375 %/year", "filename": "synthetic-plr/can275_0.075_90.tiff"}, {"label": "\u00b10.05 %/year", "filename": "synthetic-plr/can275_0.1_90.tiff"}, {"label": "\u00b10.075 %/year", "filename": "synthetic-plr/can275_0.15_90.tiff"}, {"label": "\u00b10.1 %/year", "filename": "synthetic-plr/can275_0.2_90.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "\u00b10.0375 %/year", "filename": "synthetic-plr/can275_0.075_90.tiff"}, {"label": "\u00b10.05 %/year", "filename": "synthetic-plr/can275_0.1_90.tiff"}, {"label": "\u00b10.075 %/year", "filename": "synthetic-plr/can275_0.15_90.tiff"}, {"label": "\u00b10.1 %/year", "filename": "synthetic-plr/can275_0.2_90.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Viridis", "layers_title": "PLR Uncertainty:"});
   });
 </script>
 </section>
@@ -447,7 +447,7 @@ and how does it vary across climates?</strong></p>
 The following maps show the same analysis as above, but assuming First Solar
 Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
 <p>First, at the 50th percentile:</p>
-<div id="sidebar-2" class="leaflet-sidebar collapsed">
+<div id="sidebar-2" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -471,15 +471,15 @@ Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
     </div>
 </div>
 
-<div id="map-2" style="height: 400px; width: 100%"></div>
+<div id="map-2" style="height: 500px; width: 100%"></div>
 
 <script>
   $(window).on('load', function() {
-      init("2", {"id": "2", "geotiffSpecs": [{"label": "synthetic-plr/fslr_0.075_50.tiff", "filename": "synthetic-plr/fslr_0.075_50.tiff"}, {"label": "synthetic-plr/fslr_0.1_50.tiff", "filename": "synthetic-plr/fslr_0.1_50.tiff"}, {"label": "synthetic-plr/fslr_0.15_50.tiff", "filename": "synthetic-plr/fslr_0.15_50.tiff"}, {"label": "synthetic-plr/fslr_0.2_50.tiff", "filename": "synthetic-plr/fslr_0.2_50.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Spectral"});
+      init("2", {"id": "2", "geotiffSpecs": [{"label": "synthetic-plr/fslr_0.075_50.tiff", "filename": "synthetic-plr/fslr_0.075_50.tiff"}, {"label": "synthetic-plr/fslr_0.1_50.tiff", "filename": "synthetic-plr/fslr_0.1_50.tiff"}, {"label": "synthetic-plr/fslr_0.15_50.tiff", "filename": "synthetic-plr/fslr_0.15_50.tiff"}, {"label": "synthetic-plr/fslr_0.2_50.tiff", "filename": "synthetic-plr/fslr_0.2_50.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Spectral", "layers_title": ""});
   });
 </script>
 <p>And again at the 90th:</p>
-<div id="sidebar-3" class="leaflet-sidebar collapsed">
+<div id="sidebar-3" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -503,11 +503,11 @@ Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
     </div>
 </div>
 
-<div id="map-3" style="height: 400px; width: 100%"></div>
+<div id="map-3" style="height: 500px; width: 100%"></div>
 
 <script>
   $(window).on('load', function() {
-      init("3", {"id": "3", "geotiffSpecs": [{"label": "synthetic-plr/fslr_0.075_90.tiff", "filename": "synthetic-plr/fslr_0.075_90.tiff"}, {"label": "synthetic-plr/fslr_0.1_90.tiff", "filename": "synthetic-plr/fslr_0.1_90.tiff"}, {"label": "synthetic-plr/fslr_0.15_90.tiff", "filename": "synthetic-plr/fslr_0.15_90.tiff"}, {"label": "synthetic-plr/fslr_0.2_90.tiff", "filename": "synthetic-plr/fslr_0.2_90.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
+      init("3", {"id": "3", "geotiffSpecs": [{"label": "synthetic-plr/fslr_0.075_90.tiff", "filename": "synthetic-plr/fslr_0.075_90.tiff"}, {"label": "synthetic-plr/fslr_0.1_90.tiff", "filename": "synthetic-plr/fslr_0.1_90.tiff"}, {"label": "synthetic-plr/fslr_0.15_90.tiff", "filename": "synthetic-plr/fslr_0.15_90.tiff"}, {"label": "synthetic-plr/fslr_0.2_90.tiff", "filename": "synthetic-plr/fslr_0.2_90.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": "", "layers_title": ""});
   });
 </script>
 </section>

@@ -36,6 +36,10 @@ Scenario 1: c-Si
 First, at the 50th percentile:
 
 .. map-widget:: 
+   :colorscale_min: 2
+   :colorscale_max: 10
+   :colorscale_name: Viridis
+   :layers_title: PLR Uncertainty:
 
     synthetic-plr/can275_0.075_50.tiff : ±0.0375 %/year
     synthetic-plr/can275_0.1_50.tiff : ±0.05 %/year
@@ -45,6 +49,10 @@ First, at the 50th percentile:
 And again at the 90th:
 
 .. map-widget:: 
+   :colorscale_min: 2
+   :colorscale_max: 10
+   :colorscale_name: Viridis
+   :layers_title: PLR Uncertainty:
 
     synthetic-plr/can275_0.075_90.tiff : ±0.0375 %/year
     synthetic-plr/can275_0.1_90.tiff : ±0.05 %/year

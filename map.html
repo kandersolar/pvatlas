@@ -280,7 +280,7 @@ in the upper right of the map.</p>
 
 <script src="_static/map-widget.js"></script>
 
-<div id="sidebar-0" class="leaflet-sidebar collapsed">
+<div id="sidebar-0" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -304,15 +304,15 @@ in the upper right of the map.</p>
     </div>
 </div>
 
-<div id="map-0" style="height: 400px; width: 100%"></div>
+<div id="map-0" style="height: 500px; width: 100%"></div>
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "layer label 1", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "layer labe 2", "filename": "ft-20_all-sky_0.85.tiff"}, {"label": "another layer", "filename": "ft-lat_all-sky_0.00.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "layer label 1", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "another layer", "filename": "ft-lat_all-sky_0.00.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": "", "layers_title": ""});
   });
 </script>
 <p>Here is a second map:</p>
-<div id="sidebar-1" class="leaflet-sidebar collapsed">
+<div id="sidebar-1" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
@@ -336,11 +336,11 @@ in the upper right of the map.</p>
     </div>
 </div>
 
-<div id="map-1" style="height: 400px; width: 100%"></div>
+<div id="map-1" style="height: 500px; width: 100%"></div>
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "ft-20_all-sky_0.00.tiff", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "sat_all-sky_0.00.tiff", "filename": "sat_all-sky_0.00.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": ""});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "ft-20_all-sky_0.00.tiff", "filename": "ft-20_all-sky_0.00.tiff"}, {"label": "sat_all-sky_0.00.tiff", "filename": "sat_all-sky_0.00.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": "", "layers_title": ""});
   });
 </script>
 </section>
