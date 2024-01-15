@@ -64,6 +64,7 @@ Here are maps:
    :colorscale_name: RdBu
    :colorscale_min: -0.01
    :colorscale_max: 0.01
+   :colorscale_label_digits: 2
 
     resource-variability/psm3_relative_change_GHI_US.tiff : GHI
     resource-variability/psm3_relative_change_DNI_US.tiff : DNI

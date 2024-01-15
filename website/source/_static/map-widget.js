@@ -138,7 +138,7 @@ function makeColorBarSVG(stops, ticks, container, id){
   return html;
 }
 
-function makeColorScale(vmin, vmax, name, container, id){
+function makeColorScale(vmin, vmax, name, colorscale_label_digits, container, id){
   var scale = chroma.scale(name);
   var nstops = 10;
   var xs = [];
@@ -156,7 +156,7 @@ function makeColorScale(vmin, vmax, name, container, id){
   var labels = [];
   for(var i = 0; i < nticks; i++){
     var x = i / (nticks - 1);
-    var label = (vmin + x * (vmax - vmin)).toFixed(1);
+    var label = (vmin + x * (vmax - vmin)).toFixed(colorscale_label_digits);
     xs.push(x);
     labels.push(label);
   }
@@ -189,7 +189,8 @@ function init(id, options){
          container.id = "colorbar-" + id;
          container.style = "height:40px; width:300px";
          container.innerHTML = makeColorScale(options.colorscale_min, options.colorscale_max, 
-                                              options.colorscale_name, container, id);
+                                              options.colorscale_name, options.colorscale_label_digits,
+                                              container, id);
          return container;
       },
       onRemove: function(map) {
@@ -285,7 +286,7 @@ function init(id, options){
       var value = "-";
       if(pixelValues !== null && pixelValues[0] != -9999){
         value = pixelValues[0];
-        value = value.toFixed(3);
+        value = value.toFixed(4);
       }
       text = text + (
          "<tr>" + "<td>" + prefix + layer.name + suffix + "</td>" +
