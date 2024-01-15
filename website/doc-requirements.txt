@@ -3,3 +3,4 @@ sphinx-book-theme==0.3.3
 sphinxcontrib-bibtex==2.5.0
 rioxarray==0.15.0
 matplotlib==3.8.2
+sphinxcontrib-applehelp==1.0.4  # compatibility with sphinx < 5
