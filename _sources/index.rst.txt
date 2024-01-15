@@ -62,3 +62,4 @@ This project uses many open-source software packages, including:
 
    map
    chapter 1 - plr
+   chapter 2 - resource
