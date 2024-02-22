@@ -99,9 +99,12 @@ Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.
    :short_description: Data Length [years]
    :layers_title: PLR Uncertainty:
 
-    synthetic-plr/fslr_0.1_90.tiff
-    synthetic-plr/fslr_0.2_90.tiff
+    synthetic-plr/fslr_0.1_90.tiff : ±0.05 %/year
+    synthetic-plr/fslr_0.2_90.tiff : ±0.1 %/year
 
+
+The results in this case show broadly the same pattern as in the c-Si map,
+although any given location might require one more or one fewer year of data.
 
 
 References
