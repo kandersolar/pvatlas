@@ -11,6 +11,7 @@ L.Control.Layers.include({
           "name": obj.name,
           "visible": control._map.hasLayer(obj.layer),
           "georasters": obj.layer.georasters,
+          "metadata": obj.layer.options.metadata,
         });
       }
     });
@@ -41,13 +42,6 @@ function rasterToLayer(georaster, metadata, options){
   var scale = chroma.scale(name);
 
   var description = null;
-  if(metadata !== null){
-      description = (
-          "<br>" +
-          "File Date: " + metadata["CREATION_DATE"] + "<br>" +
-          "Description: " + metadata["DESCRIPTION"]
-      );
-  }
 
   var layer = new GeoRasterLayer({
     georaster: georaster,
@@ -60,7 +54,6 @@ function rasterToLayer(georaster, metadata, options){
       return color;
     },
     resolution: 512,
-    attribution: description  // TODO: put layer description somewhere nicer?
   });
   return layer;
 }
@@ -86,6 +79,7 @@ function addLayer(filename, map, layerControl, name, order, options){
         var layer = rasterToLayer(georaster, metadata, options);
         layer.options.order = order;
         layer.options.filename = filename;
+        layer.options.metadata = metadata;
         layerControl.addBaseLayer(layer, name);
         if(order == 0){
           // make the first layer visible by default
@@ -270,6 +264,21 @@ function init(id, options){
   document.getElementById("select-layer1-" + id).onchange = onSelectChange;
   document.getElementById("select-layer2-" + id).onchange = onSelectChange;
 
+  // change selected layer interaction
+  map.on('baselayerchange', function(e) {
+    var text = "";
+    var layers = layerControl.getOverlays();
+    for(var i = 0; i < layers.length; i++){
+      var layer = layers[i];
+      console.log(layer);
+      if(layer.name == e.name){
+        text = "Description: " + layer.metadata['DESCRIPTION'] + " File date: " + layer.metadata["CREATION_DATE"] + ".";
+        break;
+      }
+    }
+
+    document.getElementById("map-caption-" + id).innerHTML = text;
+  });
 
   // mousemove / hover interaction
   map.on('mousemove', function(evt) {
