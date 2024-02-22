@@ -20,6 +20,7 @@ References
 
 .. .. bibliography::
 ..    :list: enumerated
+..    :filter: False 
 
    
 

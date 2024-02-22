@@ -70,6 +70,7 @@ References
 
 .. bibliography::
    :list: enumerated
+   :filter: False 
 
    Sengupta2018
    Holmgren2018

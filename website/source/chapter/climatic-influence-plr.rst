@@ -96,10 +96,11 @@ References
 
 .. bibliography::
    :list: enumerated
+   :filter: False 
 
+   Theristis2023srrl
    Deceglie2023
    Jordan2022
-   Theristis2023srrl
    
 
 Data files

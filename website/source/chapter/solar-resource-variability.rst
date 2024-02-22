@@ -75,6 +75,7 @@ References
 
 .. bibliography::
    :list: enumerated
+   :filter: False 
 
    Habte2020
 
