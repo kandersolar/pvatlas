@@ -67,7 +67,7 @@ function rasterToLayer(georaster, metadata, options){
 
 
 function addLayer(filename, map, layerControl, name, order, options){
-  fetch("./geotiffs/" + filename)
+  fetch("/geotiffs/" + filename)
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
       parseGeoraster(arrayBuffer).then(async georaster => {
@@ -112,7 +112,7 @@ async function doArithmetic(operation, layer1, layer2){
 }
 
 
-function makeColorBarSVG(stops, ticks, container, id){
+function makeColorBarSVG(stops, ticks, description, container, id){
 
   var gradientHTML = '<svg width="100%" height="0%"><linearGradient id="lg-' + id + '">';
   for(var i = 0; i < stops.x.length; i++){
@@ -121,24 +121,26 @@ function makeColorBarSVG(stops, ticks, container, id){
     gradientHTML += "<stop offset=" + percentage + "% stop-color='" + color + "'/>"
   }
   gradientHTML += "</linearGradient></svg>";
+  
+  var titleHTML = '<svg width="100%" height="30%" y="0%"><text fill="#000000" x="50%" y="80%" font-family="sans-serif" font-size="14px" text-anchor="middle">' + description + '</text></svg>';
 
-  var colorBarHTML = '<svg width="100%" height="30%" y="10%"><rect fill-opacity="' + COLORSCALE_OPACITY + '" fill="url(#lg-' + id + ')" x="5%" y="0%" width="90%" height="100%"/></svg>';
+  var colorBarHTML = '<svg width="100%" height="20%" y="30%"><rect fill-opacity="' + COLORSCALE_OPACITY + '" fill="url(#lg-' + id + ')" x="5%" y="0%" width="90%" height="100%"/></svg>';
 
-  var tickLabelHTML = '<svg width="100%" height="60%" y="40%">';
+  var tickLabelHTML = '<svg width="100%" height="60%" y="50%">';
   for(var i = 0; i < ticks.x.length; i++){
     var fraction = ticks.x[i];
     var label = ticks.labels[i];
     var position = 100 * (0.05 + fraction * 0.9);
     tickLabelHTML += '<rect fill="#000000" x="' + (position - 0.25/2) + '%" y="0%" width="0.25%" height="20%"/>';
-    tickLabelHTML += '<text fill="#000000" x="' + position + '%" y="80%" font-family="sans-serif" font-size="14px" text-anchor="middle">' + label + '</text>';
+    tickLabelHTML += '<text fill="#000000" x="' + position + '%" y="60%" font-family="sans-serif" font-size="14px" text-anchor="middle">' + label + '</text>';
   }
   tickLabelHTML += '</svg>';
   
-  var html = '<svg width="100%" height="100%"">' + gradientHTML + colorBarHTML + tickLabelHTML + "</svg>";
+  var html = '<svg width="100%" height="100%"">' + gradientHTML + titleHTML + colorBarHTML + tickLabelHTML + "</svg>";
   return html;
 }
 
-function makeColorScale(vmin, vmax, name, colorscale_label_digits, container, id){
+function makeColorScale(vmin, vmax, name, colorscale_label_digits, description, container, id){
   var scale = chroma.scale(name);
   var nstops = 10;
   var xs = [];
@@ -161,7 +163,7 @@ function makeColorScale(vmin, vmax, name, colorscale_label_digits, container, id
     labels.push(label);
   }
   var ticks = {x: xs, labels: labels};
-  return makeColorBarSVG(stops, ticks, container, id);
+  return makeColorBarSVG(stops, ticks, description, container, id);
 }
 
 
@@ -187,10 +189,10 @@ function init(id, options){
        onAdd: function(map) {
          var container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-control');
          container.id = "colorbar-" + id;
-         container.style = "height:40px; width:300px";
+         container.style = "height:60px; width:300px";
          container.innerHTML = makeColorScale(options.colorscale_min, options.colorscale_max, 
                                               options.colorscale_name, options.colorscale_label_digits,
-                                              container, id);
+                                              options.short_description, container, id);
          return container;
       },
       onRemove: function(map) {
@@ -274,7 +276,7 @@ function init(id, options){
     var latlng = map.mouseEventToLatLng(evt.originalEvent);
     var text = "<p>Coordinates: (" + latlng.lat.toFixed(3) + ", " + latlng.lng.toFixed(3) + ")</p>"
 
-    text += "<table style='border-spacing: 5px;'><tr><th>Layer</th><th>Pixel value</th></tr>";
+    text += "<table style='border-spacing: 5px;'><tr><th>Layer</th><th>" + options.short_description + "</th></tr>";
     layerControl.getOverlays().forEach(function(layer){
       var prefix = "";
       var suffix = "";

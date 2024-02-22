@@ -70,9 +70,21 @@ Here are maps:
     resource-variability/psm3_relative_change_DNI_US.tiff : DNI
 
 
+References
+----------
+
+.. bibliography::
+   :list: enumerated
+   :filter: False 
+
+   Habte2020
+
 
 Data files
 ----------
+
+The geographic datasets shown on this page are available in the GeoTIFF
+files listed below:
 
 .. geotiff-index::
     :pattern: geotiffs/resource-variability/*.tiff
