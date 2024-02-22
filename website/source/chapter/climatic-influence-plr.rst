@@ -80,8 +80,9 @@ the corner of the map).
 This map shows that fewer years of data are needed in the desert southwest
 than elsewhere in the country to achieve a given uncertainty level.
 However, relaxing the required certainty level reduces the required dataset
-length, with almost everywhere in the U.S. requiring only two years of data
-to achieve PLR estimates of ±0.1 %/year (under idealized conditions).
+length, with almost everywhere in the U.S. requiring only 2-3 years of data
+to achieve PLR estimates of ±0.1 %/year (under the idealized conditions
+described above).
 
 
 Scenario 2: CdTe
