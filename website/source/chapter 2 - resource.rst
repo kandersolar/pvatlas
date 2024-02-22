@@ -70,6 +70,14 @@ Here are maps:
     resource-variability/psm3_relative_change_DNI_US.tiff : DNI
 
 
+References
+----------
+
+.. bibliography::
+   :list: enumerated
+
+   Habte2020
+
 
 Data files
 ----------
