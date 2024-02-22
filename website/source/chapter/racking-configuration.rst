@@ -2,7 +2,7 @@
 .. map-header::
 
 
-Racking Configuration (placeholder)
+Racking configuration (placeholder)
 ===================================
 
 .. warning::
