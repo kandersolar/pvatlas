@@ -2,7 +2,7 @@ About PV Atlas
 ==============
 
 .. warning::
-    This website is an unofficial prototype.
+    This website is a work-in-progress prototype.
 
 This is the website for PV Atlas, a project led by the
 PV Performance Modeling Collaborative (`PVPMC <http://pvpmc.sandia.gov>`_).
@@ -60,6 +60,5 @@ This project uses many open-source software packages, including:
    :maxdepth: 2
    :caption: Chapters
 
-   map
    chapter/climatic-influence-plr
    chapter/solar-resource-variability

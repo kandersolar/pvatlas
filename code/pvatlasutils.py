@@ -40,7 +40,7 @@ def write_geotiff(data, filename, description, metadata=None, nodata=np.float32(
             'CREATION_DATE': datetime.date.today().strftime("%Y-%m-%d"),
         }
 
-    
+
     with rasterio.open(
         filename,
         'w',
