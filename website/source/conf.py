@@ -3,8 +3,6 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-import os
-
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -47,9 +45,6 @@ html_theme_options = {
 
 html_extra_path = ['../../data']
 
-if os.getenv("GITHUB_ACTIONS") == "true":
-    html_baseurl = '/pvatlas/'
-
 
 # %%
 
@@ -65,8 +60,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+if os.getenv("GITHUB_ACTIONS") == "true":
+    HTML_ROOT = "/pvatlas/"
+else:
+    HTML_ROOT = "/"
+
+
 with open("_static/map-header.html", "r") as f:
     MAP_HTML_HEADER = f.read()
+    MAP_HTML_HEADER = MAP_HTML_HEADER.replace("##HTML_ROOT##", HTML_ROOT)
 
 with open("_static/map-widget-template.html", "r") as f:
     MAP_HTML_TEMPLATE = f.read()
@@ -109,9 +111,10 @@ class MapWidget(Directive):
 
             label = label.strip()
             filename = filename.strip()
+            uri = HTML_ROOT + "geotiffs/" + filename
             specs.append({
                 'label': label,
-                'filename': filename,
+                'filename': uri,
             })
         return specs
 
@@ -201,9 +204,9 @@ class GeotiffIndex(Directive):
                 'description': rds.attrs.get('DESCRIPTION', '-'),
                 'date': rds.attrs.get('CREATION_DATE', '-'),
                 'displayname': os.path.split(filename)[-1],
-                'url': "/" + filename.replace(os.sep, '/'),  # location within the data directory
+                'url': HTML_ROOT + filename.replace(os.sep, '/'),  # location within the data directory
                 'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
-                'thumbnail': "/" + image_filepath.replace("source" + os.sep, ""),
+                'thumbnail': HTML_ROOT + image_filepath.replace("source" + os.sep, ""),
             })
 
             
