@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "PV Atlas"
-copyright = '2023'
-author = 'PVPMC'
+copyright = '2023-2024'
+author = ''
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -39,8 +39,8 @@ html_static_path = ['_static']
 html_title = "PV Atlas"
 
 html_theme_options = {
-    # "repository_url": "https://github.com/AssessingSolar/unofficial-psm3-userguide",
-    "use_repository_button": False,
+    "repository_url": "https://github.com/kandersolar/pvatlas",
+    "use_repository_button": True,
 }
 
 html_extra_path = ['../../data']
