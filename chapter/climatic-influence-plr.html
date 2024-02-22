@@ -295,6 +295,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methodology">
+   Methodology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scenario-1-c-si">
    Scenario 1: c-Si
   </a>
@@ -336,6 +341,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methodology">
+   Methodology
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -391,7 +401,7 @@ title="Print to PDF"
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>PV systems experience gradual performance reduction over their lifetime due to component
 aging and other effects.  Many technology- and climate-specific mechanisms
-contribute to this performance loss, making it impractical to model from
+contribute to this performance loss, making it difficult to simulate and predict from
 first principles.  Instead, it is common to extract empirical performance loss rates (PLR)
 from performance measurements from fielded systems using statistical techniques.</p>
 <p>Many statistical techniques for PLR estimation have been proposed.  What has
@@ -404,13 +414,40 @@ depend on the ability of these data processing steps to suppress the “noise”
 introduced by effects like resource variability and identify the underlying
 performance trend.  The longer the dataset being analyzed, and the more stable the
 climate, the more certain the PLR estimate becomes.</p>
-<p>This chapter examines the YOY method’s performance across climates, with the central
+<p>Since these estimated PLRs affect the financing of new PV systems, understanding
+the uncertainty of these estimates brings significant value.
+This chapter examines the YOY method’s performance across climates, with the central
 question: <strong>how many years of data are needed to achieve a given level of certainty,
 and how does it vary across climates?</strong></p>
 </section>
+<section id="methodology">
+<h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h2>
+<p>Synthetic PV performance datasets based on NSRDB PSM3 data and an assumed
+PLR of -0.75 %/year were simulated for a grid of locations across the United
+States.  The datasets vary in length from 2-10+ years, and are repeated in
+each location to span the full history of the PSM3 dataset so that long-term
+resource variability is captured.  The year-on-year method is then applied
+to each dataset and the 95% confidence interval for the estimated PLR
+is recorded.  This gives a set of confidence intervals for each location and
+dataset length.  These confidence intervals are then examined to determine,
+for each location, how many years of data are required to achieve a given
+level of certainty in the PLR estimate.  This process can be repeated
+for different simulation parameters (e.g. PV technology).</p>
+<p>Using these idealized simulated datasets, we can produce a “best case”
+estimate for PLR estimation uncertainty.  In real datasets, the true uncertainty
+will be larger due to other sources of noise like system outages, sensor error,
+and array soiling.</p>
+<p>For full details on the simulation and analysis methodology,
+see <span id="id1">[<a class="reference internal" href="../publications.html#cite-1-theristis2023srrl" title="Marios Theristis, Kevin Anderson, Julián Ascencio-Vásquez, and Joshua S. Stein. How climate and data quality impact photovoltaic performance loss rate estimations. Solar RRL, December 2023. doi:10.1002/solr.202300815.">1</a>]</span>.</p>
+</section>
 <section id="scenario-1-c-si">
 <h2>Scenario 1: c-Si<a class="headerlink" href="#scenario-1-c-si" title="Permalink to this headline">#</a></h2>
-<p>First, at the 50th percentile:</p>
+<p>First, we examine the results for a simulated system using crystalline silicon
+(c-Si) PV modules.</p>
+<p>This map visualizes the minimum dataset length (in years) for the PLR
+confidence interval to have a 90% chance of being smaller than ±0.05 %/year
+(results for other thresholds can be viewed using the layer control in
+the corner of the map).</p>
 <div id="sidebar-0" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -436,13 +473,24 @@ and how does it vary across climates?</strong></p>
 </div>
 
 <div id="map-0" style="height: 500px; width: 100%"></div>
+<p><em id="map-caption-0" style="font-size:0.9em"></em></p>
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "\u00b10.0375 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.075_50.tiff"}, {"label": "\u00b10.05 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.1_50.tiff"}, {"label": "\u00b10.075 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.15_50.tiff"}, {"label": "\u00b10.1 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.2_50.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Data Length [years]", "layers_title": "PLR Uncertainty:"});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "\u00b10.05 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.1_90.tiff"}, {"label": "\u00b10.1 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.2_90.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Spectral", "colorscale_label_digits": 1, "short_description": "Data Length [years]", "layers_title": "PLR Uncertainty:"});
   });
 </script>
-<p>And again at the 90th:</p>
+<p>This map shows that fewer years of data are needed in the desert southwest
+than elsewhere in the country to achieve a given uncertainty level.
+However, relaxing the required certainty level reduces the required dataset
+length, with almost everywhere in the U.S. requiring only two years of data
+to achieve PLR estimates of ±0.1 %/year (under idealized conditions).</p>
+</section>
+<section id="scenario-2-cdte">
+<h2>Scenario 2: CdTe<a class="headerlink" href="#scenario-2-cdte" title="Permalink to this headline">#</a></h2>
+<p>Do these results depend significantly on the technology being examined?
+The following maps show the same analysis as above, but assuming First Solar
+Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
 <div id="sidebar-1" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -468,82 +516,15 @@ and how does it vary across climates?</strong></p>
 </div>
 
 <div id="map-1" style="height: 500px; width: 100%"></div>
+<p><em id="map-caption-1" style="font-size:0.9em"></em></p>
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "\u00b10.0375 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.075_90.tiff"}, {"label": "\u00b10.05 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.1_90.tiff"}, {"label": "\u00b10.075 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.15_90.tiff"}, {"label": "\u00b10.1 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/can275_0.2_90.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Data Length [years]", "layers_title": "PLR Uncertainty:"});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "\u00b10.05 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.1_90.tiff"}, {"label": "\u00b10.1 %/year", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.2_90.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Spectral", "colorscale_label_digits": 1, "short_description": "Data Length [years]", "layers_title": "PLR Uncertainty:"});
   });
 </script>
-</section>
-<section id="scenario-2-cdte">
-<h2>Scenario 2: CdTe<a class="headerlink" href="#scenario-2-cdte" title="Permalink to this headline">#</a></h2>
-<p>Do these results depend significantly on the technology being examined?
-The following maps show the same analysis as above, but assuming First Solar
-Cadmium Telluride (CdTe) PV modules instead of crystalline silicon.</p>
-<p>First, at the 50th percentile:</p>
-<div id="sidebar-2" class="leaflet-sidebar collapsed" style="bottom:100px">
-    <!-- Nav tabs -->
-    <div class="leaflet-sidebar-tabs">
-        <ul role="tablist"> <!-- top aligned tabs -->
-            <li><a href="#calculations-2" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
-        </ul>
-    </div>
- 
-    <!-- Tab panes -->
-    <div class="leaflet-sidebar-content">
-        <div class="leaflet-sidebar-pane" id="calculations-2">
-            <h1 class="leaflet-sidebar-header" style="color: #fff">
-              Calculations
-              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
-            </h1>
-            
-            <p>Calculate and show the difference between two layers:
-            
-            <p>Layer 1: <select id="select-layer1-2"></select></p>
-            <p>Layer 2: <select id="select-layer2-2"></select></p>
-        </div>
-    </div>
-</div>
-
-<div id="map-2" style="height: 500px; width: 100%"></div>
-
-<script>
-  $(window).on('load', function() {
-      init("2", {"id": "2", "geotiffSpecs": [{"label": "synthetic-plr/fslr_0.075_50.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.075_50.tiff"}, {"label": "synthetic-plr/fslr_0.1_50.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.1_50.tiff"}, {"label": "synthetic-plr/fslr_0.15_50.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.15_50.tiff"}, {"label": "synthetic-plr/fslr_0.2_50.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.2_50.tiff"}], "colorscale_min": 2.0, "colorscale_max": 10.0, "colorscale_name": "Spectral", "colorscale_label_digits": 1, "short_description": "Value", "layers_title": ""});
-  });
-</script>
-<p>And again at the 90th:</p>
-<div id="sidebar-3" class="leaflet-sidebar collapsed" style="bottom:100px">
-    <!-- Nav tabs -->
-    <div class="leaflet-sidebar-tabs">
-        <ul role="tablist"> <!-- top aligned tabs -->
-            <li><a href="#calculations-3" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
-        </ul>
-    </div>
- 
-    <!-- Tab panes -->
-    <div class="leaflet-sidebar-content">
-        <div class="leaflet-sidebar-pane" id="calculations-3">
-            <h1 class="leaflet-sidebar-header" style="color: #fff">
-              Calculations
-              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
-            </h1>
-            
-            <p>Calculate and show the difference between two layers:
-            
-            <p>Layer 1: <select id="select-layer1-3"></select></p>
-            <p>Layer 2: <select id="select-layer2-3"></select></p>
-        </div>
-    </div>
-</div>
-
-<div id="map-3" style="height: 500px; width: 100%"></div>
-
-<script>
-  $(window).on('load', function() {
-      init("3", {"id": "3", "geotiffSpecs": [{"label": "synthetic-plr/fslr_0.075_90.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.075_90.tiff"}, {"label": "synthetic-plr/fslr_0.1_90.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.1_90.tiff"}, {"label": "synthetic-plr/fslr_0.15_90.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.15_90.tiff"}, {"label": "synthetic-plr/fslr_0.2_90.tiff", "filename": "/pvatlas/geotiffs/synthetic-plr/fslr_0.2_90.tiff"}], "colorscale_min": "", "colorscale_max": "", "colorscale_name": "", "colorscale_label_digits": 1, "short_description": "Value", "layers_title": ""});
-  });
-</script>
+<p>The results in this case show broadly the same pattern as in the c-Si map,
+although any given location might require one more or one fewer year of data.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>

@@ -295,6 +295,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methodology">
+   Methodology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#annual-medians">
    Annual medians
   </a>
@@ -305,8 +310,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#long-term-change">
-   Long-term change
+  <a class="reference internal nav-link" href="#long-term-trend">
+   Long-term trend
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -344,6 +349,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methodology">
+   Methodology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#annual-medians">
    Annual medians
   </a>
@@ -354,8 +364,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#long-term-change">
-   Long-term change
+  <a class="reference internal nav-link" href="#long-term-trend">
+   Long-term trend
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -401,19 +411,33 @@ title="Print to PDF"
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>The sunlight available for collection by a PV system varies across several
 timescales: hourly (due to clouds), daily (due to day and night), seasonally
-(due to Earth’s orbit and tilt), and annually (due to long-term change in
-Earth’s atmosphere).  The amount of sunlight available in a given location
-is called “solar resource”.</p>
+(due to Earth’s tilt and orbit around the sun), and annually (due to long-term change
+in the composition of Earth’s atmosphere).  The amount of sunlight reaching
+the surface is called “solar resource”.</p>
+<p>Solar resource is represented by two primary quantities: global horizontal
+irradiance (GHI) and direct normal irradiance (DNI).  GHI is the total sunlight
+incident on a horizontal plane and represents the overall solar resource.
+In contrast, DNI is measured on a plane that always faces in the sun and represents
+only the portion of sunlight coming directly from the sun (not scattered in the
+atmosphere).  DNI is more relevant for PV systems that track the sun, or concentrating
+systems that cannot collect diffuse irradiance.</p>
 <p>Different locations receive different amounts of solar resource.  For example,
-sunny lower-latitude locations like Albuquerque receive about twice
-as much solar resource as cloudy higher-latitude locations like Seattle do.</p>
-<p><strong>To-do:</strong> Describe GHI, DNI</p>
-<p>This chapter examines geographic patterns in solar resource and how
-solar resource varies over time.</p>
+due to differences in latitude and local climate, Albuquerque New Mexico
+receives about twice as much solar resource as Seattle, Washington does.
+Solar resource for a given location may also vary over time due to differences
+in cloudiness and other climatic effects.
+This chapter examines variation in solar resource, with the central
+question: <strong>how does solar resource vary, both geographically and over time?</strong></p>
+</section>
+<section id="methodology">
+<h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h2>
+<p><strong>To-do</strong></p>
 </section>
 <section id="annual-medians">
 <h2>Annual medians<a class="headerlink" href="#annual-medians" title="Permalink to this headline">#</a></h2>
-<p>Here are maps:</p>
+<p>The first set of maps shows how typical solar resource varies geographically.
+This map displays the median annual resource in terms of GHI (or DNI using
+the layer control in the corner of the map).</p>
 <div id="sidebar-0" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -439,16 +463,23 @@ solar resource varies over time.</p>
 </div>
 
 <div id="map-0" style="height: 500px; width: 100%"></div>
+<p><em id="map-caption-0" style="font-size:0.9em"></em></p>
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "GHI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_median_annual_GHI_US.tiff"}, {"label": "DNI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_median_annual_DNI_US.tiff"}], "colorscale_min": 1.0, "colorscale_max": 3.0, "colorscale_name": "YlOrRd", "colorscale_label_digits": 1, "short_description": "Value", "layers_title": ""});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "GHI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_median_annual_GHI_US.tiff"}, {"label": "DNI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_median_annual_DNI_US.tiff"}], "colorscale_min": 1.0, "colorscale_max": 3.0, "colorscale_name": "YlOrRd", "colorscale_label_digits": 1, "short_description": "Annual insolation [MWh/m^2]", "layers_title": "Irradiance component"});
   });
 </script>
+<p>A regional trend is clear: typical annual GHI ranges from about 1 MWh/m^2 in the
+Pacific Northwest, to roughly 1.5 MWh/m^2 on the East coast,
+to over 2 MWh/m^2 in the Desert Southwest.  DNI shows a similar pattern, but with
+greater variation across climates.</p>
 </section>
 <section id="annual-variability">
 <h2>Annual variability<a class="headerlink" href="#annual-variability" title="Permalink to this headline">#</a></h2>
-<p>Here are maps:</p>
+<p>Now that we’ve quantified typical solar resource geographically,
+let’s examine how much it varies from year to year.  This map shows
+the annual variability, relative to the long-term median, of annual insolation:</p>
 <div id="sidebar-1" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -474,16 +505,25 @@ solar resource varies over time.</p>
 </div>
 
 <div id="map-1" style="height: 500px; width: 100%"></div>
+<p><em id="map-caption-1" style="font-size:0.9em"></em></p>
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "GHI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_variability_annual_GHI_US.tiff"}, {"label": "DNI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_variability_annual_DNI_US.tiff"}], "colorscale_min": 0.0, "colorscale_max": 0.25, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Value", "layers_title": ""});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "GHI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_variability_annual_GHI_US.tiff"}, {"label": "DNI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_variability_annual_DNI_US.tiff"}], "colorscale_min": 0.0, "colorscale_max": 0.1, "colorscale_name": "Viridis", "colorscale_label_digits": 2, "short_description": "Annual variation [-]", "layers_title": "Irradiance component"});
   });
 </script>
+<p>Here we see that GHI in much of the country varies (at one standard deviation)
+by only ~1-4% annually.  However, two types of outlier are clear: high elevation
+locations in the Rocky Mountains, and again the Pacific Northwest.  In these
+locations, GHI can vary by over 10%.</p>
+<p>Here again, DNI shows a similar but exaggerated pattern compared with GHI.</p>
 </section>
-<section id="long-term-change">
-<h2>Long-term change<a class="headerlink" href="#long-term-change" title="Permalink to this headline">#</a></h2>
-<p>Here are maps:</p>
+<section id="long-term-trend">
+<h2>Long-term trend<a class="headerlink" href="#long-term-trend" title="Permalink to this headline">#</a></h2>
+<p>Finally, let’s examine whether the annual variation is truly random around
+the long-term median or whether there is a long-term trend in solar resource.
+This map displays the slope of a simple linear fit to annual insolation over
+many years:</p>
 <div id="sidebar-2" class="leaflet-sidebar collapsed" style="bottom:100px">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -509,12 +549,14 @@ solar resource varies over time.</p>
 </div>
 
 <div id="map-2" style="height: 500px; width: 100%"></div>
+<p><em id="map-caption-2" style="font-size:0.9em"></em></p>
 
 <script>
   $(window).on('load', function() {
-      init("2", {"id": "2", "geotiffSpecs": [{"label": "GHI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_relative_change_GHI_US.tiff"}, {"label": "DNI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_relative_change_DNI_US.tiff"}], "colorscale_min": -0.01, "colorscale_max": 0.01, "colorscale_name": "RdBu", "colorscale_label_digits": 2, "short_description": "Value", "layers_title": ""});
+      init("2", {"id": "2", "geotiffSpecs": [{"label": "GHI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_relative_change_GHI_US.tiff"}, {"label": "DNI", "filename": "/pvatlas/geotiffs/resource-variability/psm3_relative_change_DNI_US.tiff"}], "colorscale_min": -0.01, "colorscale_max": 0.01, "colorscale_name": "RdBu", "colorscale_label_digits": 2, "short_description": "Annual change [-]", "layers_title": "Irradiance component"});
   });
 </script>
+<p><strong>To-do:</strong> discuss whether this is a real trend, or an artifact of the PSM3 dataset.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
