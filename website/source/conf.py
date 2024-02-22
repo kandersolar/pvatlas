@@ -3,6 +3,8 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import os
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -44,6 +46,10 @@ html_theme_options = {
 }
 
 html_extra_path = ['../../data']
+
+if os.getenv("GITHUB_ACTIONS") == "true":
+    html_baseurl = '/pvatlas/'
+
 
 # %%
 
