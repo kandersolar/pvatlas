@@ -61,5 +61,5 @@ This project uses many open-source software packages, including:
    :caption: Chapters
 
    map
-   chapter 1 - plr
-   chapter 2 - resource
+   chapter/climatic-influence-plr
+   chapter/solar-resource-variability
