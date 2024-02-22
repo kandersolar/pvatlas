@@ -206,7 +206,7 @@ class GeotiffIndex(Directive):
                 'displayname': os.path.split(filename)[-1],
                 'url': HTML_ROOT + filename.replace(os.sep, '/'),  # location within the data directory
                 'filesize': _filesize_format(os.path.getsize(os.path.join(DATA_DIR, filename))),
-                'thumbnail': HTML_ROOT + image_filepath.replace("source" + os.sep, ""),
+                'thumbnail': "/" + image_filepath.replace("source" + os.sep, ""),
             })
 
             
