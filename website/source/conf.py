@@ -88,6 +88,7 @@ class MapWidget(Directive):
         'colorscale_max': float,
         'colorscale_name': str,
         'colorscale_label_digits': int,
+        'short_description': str,
         'layers_title': str,
     }
 
@@ -125,6 +126,7 @@ class MapWidget(Directive):
             'colorscale_max': '',
             'colorscale_name': '',
             'colorscale_label_digits': 1,
+            'short_description': 'Value',
             'layers_title': '',
         }
         for key, value in defaults.items():

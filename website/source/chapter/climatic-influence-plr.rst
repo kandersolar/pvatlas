@@ -39,6 +39,7 @@ First, at the 50th percentile:
    :colorscale_min: 2
    :colorscale_max: 10
    :colorscale_name: Viridis
+   :short_description: Data Length [years]
    :layers_title: PLR Uncertainty:
 
     synthetic-plr/can275_0.075_50.tiff : ±0.0375 %/year
@@ -52,6 +53,7 @@ And again at the 90th:
    :colorscale_min: 2
    :colorscale_max: 10
    :colorscale_name: Viridis
+   :short_description: Data Length [years]
    :layers_title: PLR Uncertainty:
 
     synthetic-plr/can275_0.075_90.tiff : ±0.0375 %/year
