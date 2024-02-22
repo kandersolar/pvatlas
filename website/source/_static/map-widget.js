@@ -67,7 +67,7 @@ function rasterToLayer(georaster, metadata, options){
 
 
 function addLayer(filename, map, layerControl, name, order, options){
-  fetch("./geotiffs/" + filename)
+  fetch("/geotiffs/" + filename)
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
       parseGeoraster(arrayBuffer).then(async georaster => {
