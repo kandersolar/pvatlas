@@ -56,6 +56,8 @@ Scenario 1: fixed tilt
 
 .. map-widget:: 
    :colorscale_name: Viridis
+   :colorscale_min: 1.0
+   :colorscale_max: 1.4
    :short_description: Energy ratio [-]
    :layers_title: Array tilt:
 
@@ -69,6 +71,8 @@ Scenario 2: single-axis tracking
 
 .. map-widget:: 
    :colorscale_name: Viridis
+   :colorscale_min: 1.0
+   :colorscale_max: 1.4
    :short_description: Energy ratio [-]
 
     racking-configuration/SAT_0_4_US_2020.tiff : SAT
