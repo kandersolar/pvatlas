@@ -3,6 +3,8 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+repo_url = "https://github.com/kandersolar/pvatlas"
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -15,6 +17,7 @@ author = ''
 
 extensions = [
     'sphinxcontrib.bibtex',
+    'sphinx.ext.extlinks',
 ]
 
 templates_path = ['_templates']
@@ -39,11 +42,16 @@ html_static_path = ['_static']
 html_title = "PV Atlas"
 
 html_theme_options = {
-    "repository_url": "https://github.com/kandersolar/pvatlas",
+    "repository_url": repo_url,
     "use_repository_button": True,
 }
 
 html_extra_path = ['../../data']
+
+
+extlinks = {
+    'script': (repo_url + '/tree/main/code/simulation-scripts/%s', ''),
+}
 
 
 # %%
