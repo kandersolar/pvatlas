@@ -63,6 +63,6 @@ This project uses many open-source software packages, including:
    chapter/solar-resource-variability
    chapter/racking-configuration
    chapter/temperature-coefficient
-   chapter/anti-reflective-coating
+   chapter/antireflective-coating
    chapter/spectral-mismatch
    chapter/climatic-influence-plr
