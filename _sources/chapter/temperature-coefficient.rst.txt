@@ -13,6 +13,8 @@ Introduction
 ------------
 
 
+Methodology
+-----------
 
 
 References
@@ -32,4 +34,4 @@ The geographic datasets shown on this page are available in the GeoTIFF
 files listed below:
 
 .. geotiff-index::
-    :pattern: geotiffs/temperature-coefficients/*.tiff
+    :pattern: geotiffs/temperature-coefficient/*.tiff

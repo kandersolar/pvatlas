@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Racking configuration &#8212; PV Atlas</title>
+    <title>Antireflective coating &#8212; PV Atlas</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -33,8 +33,8 @@
     <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Temperature coefficients (placeholder)" href="temperature-coefficient.html" />
-    <link rel="prev" title="Solar resource variability" href="solar-resource-variability.html" />
+    <link rel="next" title="Spectral mismatch (placeholder)" href="spectral-mismatch.html" />
+    <link rel="prev" title="Temperature coefficients (placeholder)" href="temperature-coefficient.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -119,8 +119,8 @@
    Solar resource variability
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="racking-configuration.html">
    Racking configuration
   </a>
  </li>
@@ -129,8 +129,8 @@
    Temperature coefficients (placeholder)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="antireflective-coating.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Antireflective coating
   </a>
  </li>
@@ -230,7 +230,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapter/racking-configuration.rst.txt"
+        <a href="../_sources/chapter/antireflective-coating.rst.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -328,7 +328,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Racking configuration</h1>
+                <h1>Antireflective coating</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -395,44 +395,53 @@ title="Print to PDF"
 
 <script src="/pvatlas/_static/map-widget.js"></script>
 
-<section id="racking-configuration">
-<h1>Racking configuration<a class="headerlink" href="#racking-configuration" title="Permalink to this headline">#</a></h1>
+<section id="antireflective-coating">
+<h1>Antireflective coating<a class="headerlink" href="#antireflective-coating" title="Permalink to this headline">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
-<p>The amount of sunlight incident on a PV array’s surface depends on the array
-orientation.  Relative to a horizontal orientation, using advantageous
-orientations can increase received insolation by up to 20% annually, depending
-on the location.  The orientation of the array is determiend by the type of racking
-the array is mounted on.</p>
-<p>Two racking types see widespready use today: fixed-tilt racking and
-single-axis trackers.  As the name implies, fixed-tilt racking is a static
-configuration where the module orientation does not change.  In contrast,
-single-axis trackers rotate the array around an axis to follow the sun
-as it crosses the sky each day.  Fixed-tilt structures are typically
-oriented towards the equator and have peak production at solar noon.
-Single-axis trackers have a broader production profile due to being able
-to face more towards the sun in the morning and evening.</p>
-<p>Since sun position varies geographically, and so does the amount of sunlight
-available at each sun position, the benefits of each racking configuration vary
-geographically.  This chapter investigates the question: <strong>how does location
-affect the performance of various common racking configurations?</strong></p>
+<p>The glass covers of PV modules reflects a portion of the incident sunlight
+away, preventing it from reaching the PV cells and being converted to
+electricity.  The fraction of light that is reflected depends on the angle
+at which it strikes the module surface (the angle of incidence, AOI).
+At larger angles of incidence, a larger fraction of the incident light is
+reflected.</p>
+<p>The nominal rating of a PV module is determined by illuminating it with light
+at approximately normal incidence (AOI=0).  This means that the “loss” caused
+by light reflection at normal incidence is included in the module’s nominal
+rating.  Therefore, only the <em>additional</em> portion of light that is reflected due to
+non-normal incidence needs to be accounted for in energy models.  The extra
+reflection loss from non-normal incidence is accounted for with the so-called
+incidence angle modifier (IAM).</p>
+<p>The precise shape of the IAM profile varies between modules depending on the
+materials that light must travel through on the way to the PV cells, and the
+texture of the surface of the PV cell itself.
+To reduce reflection losses, some modules are manufactured with a special
+antireflective coating on their surface.  This coating changes the shape
+of the IAM profile to reduce losses at large angles of incidence.</p>
+<p>The angles of incidence, and corresponding sunlight intensity, experienced
+by a real system depends on its racking configuration and location.
+This chapter investigates the question: <strong>how does the performance improvement
+from antireflective coatings vary with location and racking configuration?</strong></p>
 </section>
 <section id="methodology">
 <h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h2>
-<p>The effect of racking configuration is quantified through annual system
+<p>The effect of an anti-reflective coating is quantified through annual system
 production simulated using a PVWatts v5-style model and 30-minute NSRDB PSM3
-weather data.  The simulations assume a DC/AC ratio of 1.0 and a generic
-c-Si PV module.</p>
-<p>Three racking configurations are simulated:</p>
-<ol class="arabic simple">
-<li><p>Equator-facing fixed-tilt system, tilted at 20 degrees</p></li>
-<li><p>Equator-facing fixed-tilt system, tilt equal to latitude</p></li>
-<li><p>Single-axis tracking, with horizontal north-south axis and gcr of 0.4</p></li>
-</ol>
+weather data.  The incidence angle modifier (IAM) is calculated using
+a physical model based on Snell’s law and the Fresnel equations.  The coating
+is simulated by including an additional layer in the IAM model at the specified
+index of refraction.  IAM is applied only to the direct/beam component
+of incident irradiance.</p>
+<ul class="simple">
+<li><p><strong>TODO</strong>: ARC also increases the nameplate rating…</p></li>
+<li><p><strong>TODO</strong>: diffuse IAM?</p></li>
+</ul>
+<p>The simulations assume a DC/AC ratio of 1.0 and a generic
+c-Si PV module.  The single-axis tracking simulations have backtracking activated.</p>
 <p>Simulations are compared by calculating the ratio of their annual energy
-to the annual energy simulated for a fixed horizontal system.</p>
+to the annual energy simulated for the same system but with no antireflective coating.</p>
 <p>The pvlib-python modeling script used to simulate the results for each
-location is available at GitHub: <a class="reference external" href="https://github.com/kandersolar/pvatlas/tree/main/code/simulation-scripts/racking-configuration.py">racking-configuration.py</a>.</p>
+location is available at GitHub: <a class="reference external" href="https://github.com/kandersolar/pvatlas/tree/main/code/simulation-scripts/antireflective-coating.py">antireflective-coating.py</a>.</p>
 </section>
 <section id="scenario-1-fixed-tilt">
 <h2>Scenario 1: fixed tilt<a class="headerlink" href="#scenario-1-fixed-tilt" title="Permalink to this headline">#</a></h2>
@@ -465,7 +474,7 @@ location is available at GitHub: <a class="reference external" href="https://git
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "20 degrees", "filename": "/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"}, {"label": "Latitude", "filename": "/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.4, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Energy ratio [-]", "layers_title": "Array tilt:"});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "n_ar = 1.1", "filename": "/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.2", "filename": "/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.3", "filename": "/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.4", "filename": "/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.01, "colorscale_name": "Viridis", "colorscale_label_digits": 3, "short_description": "Energy ratio [-]", "layers_title": "ARC index of refraction:"});
   });
 </script>
 </section>
@@ -500,7 +509,7 @@ location is available at GitHub: <a class="reference external" href="https://git
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "SAT", "filename": "/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.4, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Energy ratio [-]", "layers_title": ""});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "n_ar = 1.1", "filename": "/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.2", "filename": "/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.3", "filename": "/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.4", "filename": "/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.01, "colorscale_name": "Viridis", "colorscale_label_digits": 3, "short_description": "Energy ratio [-]", "layers_title": "ARC index of refraction:"});
   });
 </script>
 </section>
@@ -522,16 +531,36 @@ files listed below:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/FT_20_US_2020.png" src="../_images/FT_20_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy ratio of a 20-degree fixed-tilt system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_1__FT_20_US_2020.png" src="../_images/1_1__FT_20_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.1, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_1__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/FT_lat_US_2020.png" src="../_images/FT_lat_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy ratio of a tilt=latitude fixed-tilt system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;FT_lat_US_2020.tiff - [3.4 MiB]</a></p>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.png" src="../_images/1_1__SAT_0_4_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.1, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_1__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/SAT_0_4_US_2020.png" src="../_images/SAT_0_4_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy ratio of a single-axis tracking (gcr=0.4) system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_2__FT_20_US_2020.png" src="../_images/1_2__FT_20_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.2, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_2__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.png" src="../_images/1_2__SAT_0_4_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.2, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_2__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_3__FT_20_US_2020.png" src="../_images/1_3__FT_20_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.3, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_3__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.png" src="../_images/1_3__SAT_0_4_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.3, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_3__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_4__FT_20_US_2020.png" src="../_images/1_4__FT_20_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.4, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_4__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.png" src="../_images/1_4__SAT_0_4_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.4, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_4__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 </tbody>
@@ -547,17 +576,17 @@ files listed below:</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="solar-resource-variability.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="temperature-coefficient.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Solar resource variability</p>
+            <p class="prev-next-title">Temperature coefficients (placeholder)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="temperature-coefficient.html" title="next page">
+    <a class='right-next' id="next-link" href="spectral-mismatch.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Temperature coefficients (placeholder)</p>
+        <p class="prev-next-title">Spectral mismatch (placeholder)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
