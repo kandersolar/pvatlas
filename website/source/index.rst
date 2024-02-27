@@ -60,9 +60,9 @@ This project uses many open-source software packages, including:
    :maxdepth: 2
    :caption: Chapters
 
-   chapter/climatic-influence-plr
    chapter/solar-resource-variability
    chapter/racking-configuration
-   chapter/anti-reflective-coatings
+   chapter/temperature-coefficient
+   chapter/anti-reflective-coating
    chapter/spectral-mismatch
-   chapter/temperature-coefficients
+   chapter/climatic-influence-plr
