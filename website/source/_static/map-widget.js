@@ -53,7 +53,7 @@ function rasterToLayer(georaster, metadata, options){
       var color = scale(scaledPixelValue).hex();
       return color;
     },
-    resolution: 512,
+    resolution: 256,
   });
   return layer;
 }
