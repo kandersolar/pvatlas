@@ -310,6 +310,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scenario-3-dual-axis-tracking">
+   Scenario 3: dual-axis tracking
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -359,6 +364,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scenario-3-dual-axis-tracking">
+   Scenario 3: dual-axis tracking
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -404,18 +414,34 @@ orientation.  Relative to a horizontal orientation, using advantageous
 orientations can increase received insolation by up to 20% annually, depending
 on the location.  The orientation of the array is determiend by the type of racking
 the array is mounted on.</p>
-<p>Two racking types see widespready use today: fixed-tilt racking and
-single-axis trackers.  As the name implies, fixed-tilt racking is a static
-configuration where the module orientation does not change.  In contrast,
-single-axis trackers rotate the array around an axis to follow the sun
-as it crosses the sky each day.  Fixed-tilt structures are typically
-oriented towards the equator and have peak production at solar noon.
-Single-axis trackers have a broader production profile due to being able
-to face more towards the sun in the morning and evening.</p>
-<p>Since sun position varies geographically, and so does the amount of sunlight
-available at each sun position, the benefits of each racking configuration vary
-geographically.  This chapter investigates the question: <strong>how does location
-affect the performance of various common racking configurations?</strong></p>
+<p>Racking falls into one of three main configurations:</p>
+<ol class="arabic">
+<li><p><strong>Fixed-tilt racking</strong></p>
+<p><cite>Description</cite>: Fixed-tilt racking is a static configuration
+where the module orientation (tilt and azimuth angles)
+does not change.  Fixed-tilt structures are typically
+oriented towards the equator and have peak production at solar noon.</p>
+<p><cite>Key parameters</cite>: tilt angle, azimuth angle</p>
+</li>
+<li><p><strong>Single-axis trackers</strong></p>
+<p><cite>Description</cite>: Single-axis trackers (SATs) rotate the modules around an axis
+to follow the sun as it crosses the sky each day.  SATs typically align their
+rotation axis north-south so that the modules can be oriented east in the morning
+and west in the afternoon.  SATs tend to have a somewhat broader production
+profile than fixed-tilt arrays.</p>
+<p><cite>Key parameters</cite>: ground coverage ratio, maximum rotation angle</p>
+</li>
+<li><p><strong>Dual-axis trackers</strong></p>
+<p><cite>Description</cite>: Dual-axis trackers (DATs) rotate the modules around two axes
+and have the ability to face any position in the sky.  DATs tend to have an
+even broader production profile than SATs.  Compared to fixed-tilt and SATs,
+DATs are not very common in today’s PV systems.</p>
+<p><cite>Key parameters</cite>: N/A</p>
+</li>
+</ol>
+<p>Sun position varies geographically, and so does the amount of sunlight
+available at each sun position.  This chapter investigates the question:
+<strong>how do various common racking configurations compare geographically?</strong></p>
 </section>
 <section id="methodology">
 <h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h2>
@@ -423,12 +449,16 @@ affect the performance of various common racking configurations?</strong></p>
 production simulated using a PVWatts v5-style model and 30-minute NSRDB PSM3
 weather data.  The simulations assume a DC/AC ratio of 1.0 and a generic
 c-Si PV module.</p>
-<p>Three racking configurations are simulated:</p>
+<p>The primary racking types are simulated in various configurations as follows:</p>
 <ol class="arabic simple">
-<li><p>Equator-facing fixed-tilt system, tilted at 20 degrees</p></li>
-<li><p>Equator-facing fixed-tilt system, tilt equal to latitude</p></li>
-<li><p>Single-axis tracking, with horizontal north-south axis and gcr of 0.4</p></li>
+<li><p>Equator-facing fixed-tilt: 5 degree, 20 degree, and latitude tilts</p></li>
+<li><p>Single-axis tracking: horizontal north-south axis, 60 degree max rotation,
+with backtracking enabled according to ground coverage ratios of 0.2, 0.3,
+0.4, and 0.5.  The trackers use the conventional astronomical-based pointing
+algorithm.</p></li>
+<li><p>Dual-axis tracking: no rotation limits, always pointing directly at the sun.</p></li>
 </ol>
+<p>All simulations are assumed to be shade-free.</p>
 <p>Simulations are compared by calculating the ratio of their annual energy
 to the annual energy simulated for a fixed horizontal system.</p>
 <p>The pvlib-python modeling script used to simulate the results for each
@@ -465,7 +495,7 @@ location is available at GitHub: <a class="reference external" href="https://git
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "20 degrees", "filename": "/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"}, {"label": "Latitude", "filename": "/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.4, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Energy ratio [-]", "layers_title": "Array tilt:"});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "Latitude", "filename": "/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"}, {"label": "20 degrees", "filename": "/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"}, {"label": "5 degrees", "filename": "/pvatlas/geotiffs/racking-configuration/FT_5_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.3, "colorscale_name": "Viridis", "colorscale_label_digits": 2, "short_description": "Energy ratio [-]", "layers_title": "Array tilt:"});
   });
 </script>
 </section>
@@ -500,7 +530,42 @@ location is available at GitHub: <a class="reference external" href="https://git
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "SAT", "filename": "/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.4, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Energy ratio [-]", "layers_title": ""});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "SAT, GCR=0.2", "filename": "/pvatlas/geotiffs/racking-configuration/SAT_0_2_US_2020.tiff"}, {"label": "SAT, GCR=0.3", "filename": "/pvatlas/geotiffs/racking-configuration/SAT_0_3_US_2020.tiff"}, {"label": "SAT, GCR=0.4", "filename": "/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"}, {"label": "SAT, GCR=0.5", "filename": "/pvatlas/geotiffs/racking-configuration/SAT_0_5_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.5, "colorscale_name": "Viridis", "colorscale_label_digits": 2, "short_description": "Energy ratio [-]", "layers_title": ""});
+  });
+</script>
+</section>
+<section id="scenario-3-dual-axis-tracking">
+<h2>Scenario 3: dual-axis tracking<a class="headerlink" href="#scenario-3-dual-axis-tracking" title="Permalink to this headline">#</a></h2>
+<div id="sidebar-2" class="leaflet-sidebar collapsed" style="bottom:100px">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist"> <!-- top aligned tabs -->
+            <li><a href="#calculations-2" role="tab"><i class="fa-solid fa-calculator"></i></a></li>
+        </ul>
+    </div>
+ 
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="calculations-2">
+            <h1 class="leaflet-sidebar-header" style="color: #fff">
+              Calculations
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+            </h1>
+            
+            <p>Calculate and show the difference between two layers:
+            
+            <p>Layer 1: <select id="select-layer1-2"></select></p>
+            <p>Layer 2: <select id="select-layer2-2"></select></p>
+        </div>
+    </div>
+</div>
+
+<div id="map-2" style="height: 500px; width: 100%"></div>
+<p><em id="map-caption-2" style="font-size:0.9em"></em></p>
+
+<script>
+  $(window).on('load', function() {
+      init("2", {"id": "2", "geotiffSpecs": [{"label": "Dual-axis", "filename": "/pvatlas/geotiffs/racking-configuration/DAT_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.8, "colorscale_name": "Viridis", "colorscale_label_digits": 1, "short_description": "Energy ratio [-]", "layers_title": ""});
   });
 </script>
 </section>
@@ -522,16 +587,36 @@ files listed below:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/FT_20_US_2020.png" src="../_images/FT_20_US_20201.png" /></a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/DAT_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/DAT_US_2020.png" src="../_images/DAT_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy ratio of a dual-axis tracking system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/DAT_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;DAT_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/FT_20_US_2020.png" src="../_images/FT_20_US_20201.png" /></a></p></td>
 <td><p>Description: Annual energy ratio of a 20-degree fixed-tilt system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_5_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/FT_5_US_2020.png" src="../_images/FT_5_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy ratio of a 5-degree fixed-tilt system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_5_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;FT_5_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/FT_lat_US_2020.png" src="../_images/FT_lat_US_20201.png" /></a></p></td>
 <td><p>Description: Annual energy ratio of a tilt=latitude fixed-tilt system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/FT_lat_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;FT_lat_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_2_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/SAT_0_2_US_2020.png" src="../_images/SAT_0_2_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy ratio of a single-axis tracking (gcr=0.2) system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_2_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;SAT_0_2_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_3_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/SAT_0_3_US_2020.png" src="../_images/SAT_0_3_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy ratio of a single-axis tracking (gcr=0.3) system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_3_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;SAT_0_3_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/SAT_0_4_US_2020.png" src="../_images/SAT_0_4_US_20201.png" /></a></p></td>
 <td><p>Description: Annual energy ratio of a single-axis tracking (gcr=0.4) system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_5_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/racking-configuration/SAT_0_5_US_2020.png" src="../_images/SAT_0_5_US_20201.png" /></a></p></td>
+<td><p>Description: Annual energy ratio of a single-axis tracking (gcr=0.5) system, relative to a horizontal system.<p><a class="reference external" href="/pvatlas/geotiffs/racking-configuration/SAT_0_5_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;SAT_0_5_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 </tbody>
