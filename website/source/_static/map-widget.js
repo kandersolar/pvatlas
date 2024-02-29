@@ -1,4 +1,4 @@
-const COLORSCALE_OPACITY = 0.7;
+const COLORSCALE_OPACITY = 0.8;
 
 L.Control.Layers.include({
   getOverlays: function() {
@@ -168,7 +168,8 @@ function init(id, options){
         pseudoFullscreen: true
       },
       minZoom: 4,
-      maxZoom: 6,
+      maxZoom: 8,
+      scrollWheelZoom: false,
     }
   ).setView([37, -97], 4);
 
