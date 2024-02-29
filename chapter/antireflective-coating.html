@@ -430,12 +430,11 @@ production simulated using a PVWatts v5-style model and 30-minute NSRDB PSM3
 weather data.  The incidence angle modifier (IAM) is calculated using
 a physical model based on Snell’s law and the Fresnel equations.  The coating
 is simulated by including an additional layer in the IAM model at the specified
-index of refraction.  IAM is applied only to the direct/beam component
-of incident irradiance.</p>
-<ul class="simple">
-<li><p><strong>TODO</strong>: ARC also increases the nameplate rating…</p></li>
-<li><p><strong>TODO</strong>: diffuse IAM?</p></li>
-</ul>
+index of refraction.  This has the effect of both increasing light transmission
+at normal incidence (effectively increasing the module’s nameplate rating)
+and decreasing the additional reflection loss at non-normal incidence.</p>
+<p>IAM is applied only to the direct/beam component of incident irradiance.
+<strong>TODO</strong>: diffuse IAM?</p>
 <p>The simulations assume a DC/AC ratio of 1.0 and a generic
 c-Si PV module.  The single-axis tracking simulations have backtracking activated.</p>
 <p>Simulations are compared by calculating the ratio of their annual energy
@@ -474,7 +473,7 @@ location is available at GitHub: <a class="reference external" href="https://git
 
 <script>
   $(window).on('load', function() {
-      init("0", {"id": "0", "geotiffSpecs": [{"label": "n_ar = 1.1", "filename": "/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.2", "filename": "/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.3", "filename": "/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.4", "filename": "/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.01, "colorscale_name": "Viridis", "colorscale_label_digits": 3, "short_description": "Energy ratio [-]", "layers_title": "ARC index of refraction:"});
+      init("0", {"id": "0", "geotiffSpecs": [{"label": "n_ar = 1.1", "filename": "/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.2", "filename": "/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.3", "filename": "/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"}, {"label": "n_ar = 1.4", "filename": "/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"}], "colorscale_min": 1.01, "colorscale_max": 1.03, "colorscale_name": "Viridis", "colorscale_label_digits": 2, "short_description": "Energy ratio [-]", "layers_title": "ARC index of refraction:"});
   });
 </script>
 </section>
@@ -509,7 +508,7 @@ location is available at GitHub: <a class="reference external" href="https://git
 
 <script>
   $(window).on('load', function() {
-      init("1", {"id": "1", "geotiffSpecs": [{"label": "n_ar = 1.1", "filename": "/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.2", "filename": "/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.3", "filename": "/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.4", "filename": "/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"}], "colorscale_min": 1.0, "colorscale_max": 1.01, "colorscale_name": "Viridis", "colorscale_label_digits": 3, "short_description": "Energy ratio [-]", "layers_title": "ARC index of refraction:"});
+      init("1", {"id": "1", "geotiffSpecs": [{"label": "n_ar = 1.1", "filename": "/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.2", "filename": "/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.3", "filename": "/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"}, {"label": "n_ar = 1.4", "filename": "/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"}], "colorscale_min": 1.01, "colorscale_max": 1.03, "colorscale_name": "Viridis", "colorscale_label_digits": 2, "short_description": "Energy ratio [-]", "layers_title": "ARC index of refraction:"});
   });
 </script>
 </section>
@@ -532,35 +531,35 @@ files listed below:</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_1__FT_20_US_2020.png" src="../_images/1_1__FT_20_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.1, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_1__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.1 with a 20-degree fixed-tilt system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_1__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.png" src="../_images/1_1__SAT_0_4_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.1, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_1__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.1 with a 0.4-GCR single-axis tracking system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_1__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_1__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_2__FT_20_US_2020.png" src="../_images/1_2__FT_20_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.2, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_2__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.2 with a 20-degree fixed-tilt system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_2__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.png" src="../_images/1_2__SAT_0_4_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.2, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_2__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.2 with a 0.4-GCR single-axis tracking system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_2__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_2__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_3__FT_20_US_2020.png" src="../_images/1_3__FT_20_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.3, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_3__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.3 with a 20-degree fixed-tilt system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_3__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.png" src="../_images/1_3__SAT_0_4_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.3, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_3__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.3 with a 0.4-GCR single-axis tracking system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_3__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_3__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_4__FT_20_US_2020.png" src="../_images/1_4__FT_20_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.4, for a 20-degree fixed-tilt system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_4__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.4 with a 20-degree fixed-tilt system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__FT_20_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_4__FT_20_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"><img alt="/_static/thumbnails/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.png" src="../_images/1_4__SAT_0_4_US_20201.png" /></a></p></td>
-<td><p>Description: Annual energy gain with an antireflective coating of n_ar=1.4, for a 0.4-GCR single-axis tracking system.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_4__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
+<td><p>Description: Annual energy ratio for an antireflective coating of n_ar=1.4 with a 0.4-GCR single-axis tracking system, relative to the same system with no antireflective coating.<p><a class="reference external" href="/pvatlas/geotiffs/antireflective-coating/1_4__SAT_0_4_US_2020.tiff"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;1_4__SAT_0_4_US_2020.tiff - [3.4 MiB]</a></p>
 </p></td>
 </tr>
 </tbody>

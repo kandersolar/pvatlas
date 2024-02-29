@@ -45,12 +45,12 @@ production simulated using a PVWatts v5-style model and 30-minute NSRDB PSM3
 weather data.  The incidence angle modifier (IAM) is calculated using
 a physical model based on Snell's law and the Fresnel equations.  The coating
 is simulated by including an additional layer in the IAM model at the specified
-index of refraction.  IAM is applied only to the direct/beam component
-of incident irradiance.
+index of refraction.  This has the effect of both increasing light transmission
+at normal incidence (effectively increasing the module's nameplate rating)
+and decreasing the additional reflection loss at non-normal incidence.
 
-- **TODO**: ARC also increases the nameplate rating...
-
-- **TODO**: diffuse IAM?
+IAM is applied only to the direct/beam component of incident irradiance.
+**TODO**: diffuse IAM?
 
 The simulations assume a DC/AC ratio of 1.0 and a generic
 c-Si PV module.  The single-axis tracking simulations have backtracking activated.
@@ -67,9 +67,9 @@ Scenario 1: fixed tilt
 
 .. map-widget:: 
    :colorscale_name: Viridis
-   :colorscale_min: 1.00
-   :colorscale_max: 1.01
-   :colorscale_label_digits: 3
+   :colorscale_min: 1.01
+   :colorscale_max: 1.03
+   :colorscale_label_digits: 2
    :short_description: Energy ratio [-]
    :layers_title: ARC index of refraction:
 
@@ -85,9 +85,9 @@ Scenario 2: single-axis tracking
 
 .. map-widget:: 
    :colorscale_name: Viridis
-   :colorscale_min: 1.00
-   :colorscale_max: 1.01
-   :colorscale_label_digits: 3
+   :colorscale_min: 1.01
+   :colorscale_max: 1.03
+   :colorscale_label_digits: 2
    :short_description: Energy ratio [-]
    :layers_title: ARC index of refraction:
 
