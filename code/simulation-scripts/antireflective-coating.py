@@ -1,10 +1,25 @@
 import pvlib
 
+def compute_normal_transmission(n1, n2):
+    return 1 - ((n1 - n2) / (n1 + n2)) ** 2
+
+
+def compute_rating_adjustment(n_ar, n=1.526):
+    transmission_with_arc = compute_normal_transmission(1, n_ar) * compute_normal_transmission(n_ar, n)
+    transmission_without_arc = compute_normal_transmission(1, n)
+    return transmission_with_arc / transmission_without_arc
+
 
 def run_pvlib_model(df, lat, lon, n_ar, mount):
     location = pvlib.location.Location(lat, lon)
+
+    pdc0 = 1.0
+    if n_ar is not None:
+        module_rating_adjustment = compute_rating_adjustment(n_ar)
+        pdc0 = pdc0 * module_rating_adjustment
+
     array = pvlib.pvsystem.Array(mount=mount,
-                                 module_parameters={'pdc0': 1.0, 'gamma_pdc': -0.004, 'n_ar': n_ar},
+                                 module_parameters={'pdc0': pdc0, 'gamma_pdc': -0.004, 'n_ar': n_ar},
                                  temperature_model_parameters=pvlib.temperature.TEMPERATURE_MODEL_PARAMETERS['sapm']['open_rack_glass_polymer'])
     
     system = pvlib.pvsystem.PVSystem(array, inverter_parameters={'pdc0': 1.0 / 0.95})
