@@ -5,6 +5,9 @@
 Racking configuration
 =====================
 
+.. warning::
+    The results and discussion on this page are preliminary and subject to
+    change.  This content should not be cited.
 
 Introduction
 ------------
