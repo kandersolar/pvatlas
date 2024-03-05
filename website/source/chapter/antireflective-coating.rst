@@ -101,16 +101,15 @@ Scenario 2: single-axis tracking
 
 
 
-
-
 References
 ----------
 
-.. .. bibliography::
-..    :list: enumerated
-..    :filter: False 
+.. bibliography::
+   :list: enumerated
+   :filter: False 
 
-   
+   EPRI2016
+
 
 
 Data files
