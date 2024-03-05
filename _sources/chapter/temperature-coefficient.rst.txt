@@ -8,6 +8,10 @@ Temperature coefficients (placeholder)
 .. warning::
     This page is a placeholder while its content developed.
 
+.. warning::
+    The results and discussion on this page are preliminary and subject to
+    change.  This content should not be cited.
+
 
 Introduction
 ------------

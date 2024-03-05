@@ -5,6 +5,9 @@
 Racking configuration
 =====================
 
+.. warning::
+    The results and discussion on this page are preliminary and subject to
+    change.  This content should not be cited.
 
 Introduction
 ------------
@@ -94,9 +97,9 @@ Scenario 1: fixed tilt
     racking-configuration/FT_5_US_2020.tiff : 5 degrees
 
 
-
 Scenario 2: single-axis tracking
 --------------------------------
+
 
 .. map-widget:: 
    :colorscale_name: Viridis
@@ -104,11 +107,12 @@ Scenario 2: single-axis tracking
    :colorscale_max: 1.5
    :colorscale_label_digits: 2
    :short_description: Energy ratio [-]
+   :layers_title: Ground Coverage Ratio:
 
-    racking-configuration/SAT_0_2_US_2020.tiff : SAT, GCR=0.2
-    racking-configuration/SAT_0_3_US_2020.tiff : SAT, GCR=0.3
-    racking-configuration/SAT_0_4_US_2020.tiff : SAT, GCR=0.4
-    racking-configuration/SAT_0_5_US_2020.tiff : SAT, GCR=0.5
+    racking-configuration/SAT_0_2_US_2020.tiff : GCR=0.2
+    racking-configuration/SAT_0_3_US_2020.tiff : GCR=0.3
+    racking-configuration/SAT_0_4_US_2020.tiff : GCR=0.4
+    racking-configuration/SAT_0_5_US_2020.tiff : GCR=0.5
 
 
 Scenario 3: dual-axis tracking
@@ -131,7 +135,6 @@ References
 ..    :filter: False 
 
    
-
 
 Data files
 ----------

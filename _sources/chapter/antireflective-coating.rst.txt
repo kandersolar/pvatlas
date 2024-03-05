@@ -5,6 +5,9 @@
 Antireflective coating
 ======================
 
+.. warning::
+    The results and discussion on this page are preliminary and subject to
+    change.  This content should not be cited.
 
 Introduction
 ------------
@@ -98,16 +101,15 @@ Scenario 2: single-axis tracking
 
 
 
-
-
 References
 ----------
 
-.. .. bibliography::
-..    :list: enumerated
-..    :filter: False 
+.. bibliography::
+   :list: enumerated
+   :filter: False 
 
-   
+   EPRI2016
+
 
 
 Data files
